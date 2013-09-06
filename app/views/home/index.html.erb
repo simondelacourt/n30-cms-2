@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="row" >
+		<nav id="blognav" class="col-md-3">
+			<% @bloggroups.each do |bg |%>
+			<h2><%= bg.title -%></h2>
+			<ul>
+				<% bg.blog_categories.each do |c| %>
+				<li><%= link_to c.title, blog_category_url(c)%></li>
+				<% end -%>
+			</ul>			
+			<% end -%>
+		</nav>
+		<section id="blog" class="col-md-9">
+			<% @blogposts.each do |bp| %>
+			<%= render partial: 'blog_post', :object => bp, locals: {barclass: 'blog-message', rendermode: 'intro'} -%>
+			<% end -%>
+		
+		</section>
+	</div>
+</div>

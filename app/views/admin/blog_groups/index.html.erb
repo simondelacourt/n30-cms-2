@@ -1,0 +1,63 @@
+<%= render :partial =>'admin/shared/blog_navbar' -%>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Groep</th>
+        <th>Categorien</th>
+		<th>&nbsp;</th>
+      </tr>
+    </thead>
+	
+	<tbody>
+		<% @groups.each do |c| %>
+		<tr>
+			<td><%= c.title -%></td>
+			<td>
+				<ul><% c.blog_categories.each do |bc| %>
+					<li><%=  bc.title -%>
+						<div class="btn-group">
+						  <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+						    Opties <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu">
+							  <li><%= link_to 'Verwijder', admin_blog_group_blog_category_url({ :id => bc.id, :blog_group_id => c.id}), :confirm => "Weet je zeker dat je deze categorie wil verwijderen?", :method => :delete, :action => "destroy" -%></li>
+							  <li><%= link_to 'Wijzig', edit_admin_blog_group_blog_category_url({ :id => bc.id, :blog_group_id => c.id}) -%></li>
+						  </ul>
+ 						</div>
+					</li><% end -%>
+				</ul>
+			</td>
+			<td>
+				<div class="btn-group pull-right">
+					<%= link_to 'Nieuwe categorie', new_admin_blog_group_blog_category_url(c.id), :class => 'btn btn-default btn-xs ' -%>
+					
+	  			  <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+	  			    Groep <span class="caret"></span>
+	  			  </button>
+					
+   				 <ul class="dropdown-menu">
+   				 <li><%= link_to 'Wijzig groep', edit_admin_blog_group_url(c.id)-%></li>
+   				<li><%= link_to 'Verwijder groep', admin_blog_group_url(c.id), :confirm => 'Weet je zeker dat je deze groep wil verwijderen?', :method => :delete, :action => 'destroy'-%></li>
+   				</ul>
+				
+				
+			</div>
+			</td>
+		</tr>
+		<% end -%>
+	</tbody>
+</table>
+<div class="panel panel-default">
+	<div class="panel-heading"><h3 class="panel-title">Nieuwe groep</h3></div>
+	<div class="panel-body">  
+		<%= form_for [:admin, @group], html: {role: "form", class: "form-inline"} do |f| -%>
+		<div class="form-group">
+			<%= f.label :title, :class => 'sr-only'%>
+			<%= f.text_field :title, :class => "form-control", :placeholder => "Titel", :size => 100 %>
+		</div>
+		<div class="form-group pull-right">
+				<%= f.submit :class => "btn btn-default " %>
+		</div>
+		<% end -%>
+	</div>
+</div>

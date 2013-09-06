@@ -1,0 +1,13 @@
+<%= render :partial =>'admin/shared/blog_navbar' -%>
+<% @blogposts.each do |bp| -%>
+<div class="row blogset" >
+	<article class="col-md-2">
+		<div class="list-group">
+			<%= link_to 'Lees meer', admin_blog_post_url(bp), :class => 'list-group-item' -%>
+			<%= link_to "Wijzig", edit_admin_blog_post_url(bp), :class => 'list-group-item' -%>
+			<%= link_to "Verwijder", admin_blog_post_url(bp), :confirm => 'Weet je het zeker', :method => :delete, :action => 'destroy', :class => 'list-group-item' -%>
+		</div>
+	</article>
+	<%= render partial: bp, locals: {barclass: 'col-md-10 blog-message', rendermode: 'intro'} -%>
+</div>
+	<%- end %>

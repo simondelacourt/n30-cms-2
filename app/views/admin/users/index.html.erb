@@ -1,0 +1,21 @@
+<h2>Gebruikers</h2>
+<table class="table table-hover table-striped">
+    <thead>
+      <tr>
+		  
+        <th>E-mail</th>
+		<th>Voornaam</th>
+		<th>Achternaam</th>
+      </tr>
+    </thead>
+	<tbody>
+		<% @users.each do |u| %>
+		<tr>
+			<td><%= link_to u.email, edit_admin_user_url(u)  -%></td>
+			<td><%= u.firstname -%></td>
+			<td><%= u.familyname -%></td>
+			
+		</tr>
+		<% end %>
+</tbody>
+</table>

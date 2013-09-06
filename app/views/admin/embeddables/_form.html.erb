@@ -1,0 +1,46 @@
+<% if params[:mode] == 'link' %>
+<h2>Voeg nieuwe embed code toe</h2>
+<%= form_for [:admin, :page, @embeddable],:html => {:role => 'form',  class: "form-horizontal"} do |f| -%>
+<% if @embeddable.errors.any? %>
+<div id="errorExplanation" class="well">
+  <h4><%= pluralize(@embeddable.errors.count, "error") %> prohibited this record from being saved:</h4>
+  <ul>
+  <% @embeddable.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="form-group">
+	<%= f.label :title, :class => 'col-lg-1 control-label'%>
+    <div class="col-lg-11">
+		<%= f.text_field :title, :class => "form-control"%>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label 'Beschrijving', :class => 'col-lg-1 control-label'%>
+    <div class="col-lg-11">
+		<%= f.text_area :description, :class => "form-control", :rows => 5%>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label 'Link', :class => 'col-lg-1 control-label'%>
+    <div class="col-lg-11">
+		<%= f.text_field :htmlbody, :class => "form-control"%>
+	</div>
+</div>
+<%= f.hidden_field :linkmode, :value => @mode%>
+<div class="form-group">
+  <div class="col-lg-offset-1 col-lg-11">
+      <%= f.submit :class => "btn btn-default" %>
+  </div>
+</div>
+<% end -%>
+
+
+<% else %>
+<%= form_for [:admin, :page, @embeddable], :html => { :multipart => true } do |form| %>
+  <%= form.file_field :avatar %>
+<% end %>
+<% end -%>

@@ -1,0 +1,17 @@
+<h2>Pagina structuur</h2>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Pagina</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+	
+	<tbody>
+	<%= nested_structure @pages.arrange(:order => :created_at) %>
+</tbody>
+</table>
+<nav class="opmenu">
+<%= link_to raw('<i class="icon-plus"></i> Nieuwe pagina'), new_admin_page_url, :class => 'btn btn-default' -%>
+</nav>
+

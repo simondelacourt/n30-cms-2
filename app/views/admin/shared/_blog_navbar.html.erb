@@ -1,0 +1,7 @@
+<nav class="navbar navbar-default navbar-static navbar-blog" role="navigation">
+	<% if @pagetitle -%><a class="navbar-brand" href="#"><%= @pagetitle -%></a><% end -%>
+  	<ul class="nav navbar-nav navbar-right">
+		<li><%= link_to raw('<i class="icon-folder-open"></i> Categorien'), admin_blog_groups_url%></li>
+		<li><%= link_to raw('<i class="icon-plus"></i> Nieuwe blogpost'), new_admin_blog_post_url%></li>
+	</ul>
+</nav>

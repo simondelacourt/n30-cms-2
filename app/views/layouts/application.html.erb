@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+  <title>Simondelacourt</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <%= stylesheet_link_tag    "normalize.css", :media => "all" %>
+  
+  <%= stylesheet_link_tag    "site", :media => "all" %>
+  <%= stylesheet_link_tag    "bootstrap.css", :media => "all" %>
+  <%= stylesheet_link_tag    "bootstrap-theme.css", :media => "all" %>
+<link href='http://fonts.googleapis.com/css?family=Merriweather:400,900,700,300,300italic,400italic|Roboto:100,300,400,700' rel='stylesheet' type='text/css'>
+<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<link rel="alternate" type="application/atom+xml" title="Atom" href="<%= url_for feed_url(:format => 'atom') -%>" />
+  
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<header id="siteheader" class="navbar navbar-default navbar-static-top" role="navigation"> 
+		<nav class="container">
+		    <div class="navbar-header">
+			    <a class="navbar-brand" href="#">SIMON DE LA COURT</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="#">home</a></li>
+				<li><a href="#">projecten</a></li>
+				<li><a href="#">fotografie</a></li>
+				<li><a href="#">geluid</a></li>
+			</ul>
+		</nav>
+	</header>
+	<div class="container">
+	<%= yield %>
+	</div>
+</body>
+</html>

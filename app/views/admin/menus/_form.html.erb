@@ -1,0 +1,45 @@
+<%= form_for [:admin, @menu], html: {role: "form", class: "form-horizontal"} do |f| -%>
+<% if @menu.errors.any? %>
+<div id="errorExplanation" class="well">
+  <h4><%= pluralize(@menu.errors.count, "error") %> prohibited this record from being saved:</h4>
+  <ul>
+  <% @menu.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+</div>
+<% end %>
+<%= f.hidden_field :parent_id%>
+
+<div class="form-group">
+	<%= f.label :title, :class => 'col-lg-1 control-label'%>
+    <div class="col-lg-11">
+		<%= f.text_field :title, :class => "form-control"%>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label 'Link soort', :class => 'col-lg-1 control-label'%>
+    <div class="col-lg-11">
+		<%= f.select :linkmode, options_for_select([["Pagina", 'page'], ["Blog bericht", 'blog'], ["Blog categorie", 'blog-cat'], ["Extern", 'external']], @menu.linkmode), {}, :class => 'form-control' -%>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label 'Link ID', :class => 'col-lg-1 control-label'%>
+    <div class="col-lg-11">
+		<%= f.text_field :linkid, :class => "form-control"%>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label 'Externe link', :class => 'col-lg-1 control-label'%>
+    <div class="col-lg-11">
+		<%= f.text_field :externalink, :class => "form-control"%>
+	</div>
+</div>
+
+<div class="form-group">
+  <div class="col-lg-offset-1 col-lg-11">
+      <%= f.submit :class => "btn btn-default" %>
+  </div>
+</div>
+
+<% end %>

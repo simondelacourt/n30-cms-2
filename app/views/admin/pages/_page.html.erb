@@ -1,0 +1,6 @@
+<tr>
+<td><span style="padding: <%= page.depth * 10 -%>px"> <%= link_to page.title, admin_page_url(page) -%></span> </td>
+<td>
+ <div class="navbar-right"><%= link_to raw('<i class="icon-plus"></i>  Nieuwe pagina'), new_admin_page_url(:parent_id => page), :class=> 'btn btn-default btn-xs'%></div>
+</td>
+</tr>

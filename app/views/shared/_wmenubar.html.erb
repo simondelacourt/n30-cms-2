@@ -1,0 +1,49 @@
+<nav id="<%= barid -%>" class="navbar navbar-default col-lg-offset-1 col-lg-11" style="display: none;">
+	<div class="btn-group" >
+	  <a data-wysihtml5-command="bold" title="Bold" class="btn btn-default navbar-btn" ><i class="icon-bold"></i></a> 
+	  <a data-wysihtml5-command="italic" title="Italics" class="btn btn-default navbar-btn" ><i class="icon-italic"></i></a>
+	  <a data-wysihtml5-command="underline" title="Underline" class="btn btn-default navbar-btn" ><i class="icon-underline"></i></a>
+	</div>
+	<div class="btn-group">
+	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+	    H1 <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu">
+	    <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1">h1</a></li>
+	    <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2">h2</a></li>
+	    <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h3">h3</a></li>
+	  </ul>
+	</div>
+	<div class="btn-group" >
+	  <a data-wysihtml5-command="createLink" title="Create Link" class="btn btn-default navbar-btn" ><i class="icon-external-link"></i></a> 
+      <a data-wysihtml5-command="insertImage" class="btn btn-default navbar-btn"><i class="icon-picture"></i></a>
+	</div>
+	<div class="btn-group" >
+	    <a data-wysihtml5-command="undo" class="btn btn-default navbar-btn"><i class="icon-undo"></i></a>
+	    <a data-wysihtml5-command="redo" class="btn btn-default navbar-btn"><i class="icon-repeat"></i></a>
+	</div>  
+	<div class="btn-group pull-right">
+	    <a data-wysihtml5-action="change_view" class="btn btn-default navbar-btn"><i class="icon-code"></i></a>
+	</div>
+	<div data-wysihtml5-dialog="createLink" style="display: none;" class="panel panel-default">
+		<div class="panel-body">
+	  		<label>Link:</label>
+      	  	<input data-wysihtml5-dialog-field="href" value="http://" />
+    		<a data-wysihtml5-dialog-action="save" class="btn btn-default">OK</a> 
+			<a data-wysihtml5-dialog-action="cancel" class="close" aria-hidden="true">&times;</a>
+		</div>
+	</div>
+	<div data-wysihtml5-dialog="insertImage" style="display: none;" class="panel panel-default ">
+		<div class="panel-body">
+    		<label>Image:</label>
+      	  	<input data-wysihtml5-dialog-field="src" value="http://" />
+    		<label>Align:</label>
+			<select data-wysihtml5-dialog-field="className">
+        		<option value="">default</option>
+        		<option value="wysiwyg-float-left">left</option>
+        		<option value="wysiwyg-float-right">right</option>
+      	  	</select>
+			<a data-wysihtml5-dialog-action="save">OK</a>&nbsp;<a data-wysihtml5-dialog-action="cancel" class="close" aria-hidden="true">&times;</a>
+		</div>
+  	</div>
+</nav>

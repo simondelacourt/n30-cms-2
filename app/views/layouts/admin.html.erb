@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+  <title>ADMIN</title>
+  <%= stylesheet_link_tag    "admin/bootstrap.css", :media => "all" %>
+  <%= stylesheet_link_tag    "admin/bootstrap-theme.min.css", :media => "all" %>
+  <%= stylesheet_link_tag    "admin/style.css", :media => "all" %>
+  <%= stylesheet_link_tag 	 "jquery-ui-1.10.3.custom.min.css", :media => 'all' %>
+  <script src="//use.edgefonts.net/open-sans.js"></script>  
+  
+  <link href='http://fonts.googleapis.com/css?family=Merriweather:400,900,700,300,300italic,400italic|Roboto:100,300,400,700' rel='stylesheet' type='text/css'>
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+  <%= javascript_include_tag "application" %>
+  
+  <%= csrf_meta_tags %>
+</head>
+<body>
+		<nav class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation">
+	        <div class="container">
+		        <div class="navbar-header">
+					<a class="navbar-brand" href="#">CNT</a>
+		        </div>
+	 	  		<ul class="nav navbar-nav">
+			  		<li><%= link_to raw('<i class="icon-home"></i> Home'), admin_root_url -%></li>
+			  		<li<% if params[:controller].match('admin\/blog.*')%> class="active"<% end -%>><%= link_to raw('<i class="icon-quote-left"></i> Blog'), admin_blog_posts_url -%></li>
+			  		<li<% if params[:controller].match('admin\/page.*')%> class="active"<% end -%>><%= link_to raw('<i class="icon-th-large"></i> Paginas'), admin_pages_url -%></li>
+					<li<% if params[:controller].match('admin\/menu.*')%> class="active"<% end -%>><%= link_to raw('<i class="icon-sitemap"></i> Menus'), admin_menus_url -%></li>
+					<li<% if params[:id].to_i != current_user.id && params[:controller].match('admin\/users.*') -%> class="active"<% end -%>><%= link_to raw('<i class="icon-group"></i> Gebruikers'), admin_users_url -%></li>
+					<li<% if params[:controller] == 'admin/users' && params[:id].to_i == current_user.id %> class="active"<% end -%>><%= link_to raw('<i class="icon-user"></i> Mijn profiel'), edit_admin_user_url(current_user.id) -%></li>
+					
+		  		</ul>
+	    		<ul class="nav navbar-nav navbar-right">
+	     		   <li><%= link_to raw('<i class="icon-signout"></i> Uitloggen'), destroy_user_session_path, :method => :delete %></li>
+	    	   </ul>
+		   </div>
+		</nav>
+		<div class="container">
+		<%= yield %>
+		
+	</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<div class="row" >
+	<nav id="blognav" class="col-md-3">
+		<% @bloggroups.each do |bg |%>
+		<h2><%= bg.title -%></h2>
+		<ul>
+			<% bg.blog_categories.each do |c| %>
+			<li><%= link_to c.title, blog_category_url(c)%></li>
+			<% end -%>
+		</ul>			
+		<% end -%>
+	</nav>
+	<section id="blog" class="col-md-9">
+		<%= render partial: 'blog_post', :object => @blogpost, locals: {barclass: 'blog-message', rendermode: 'body'} -%>
+	
+	</section>
+</div>
+

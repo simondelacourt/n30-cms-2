@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-md-3">
+	<h2>Recent blog posts</h2>
+</div>
+<div class="col-md-9">
+
+<% @blogposts.each do |bp| %>
+<h3><%= bp.title -%></h3>
+<% unless bp.intro.nil?%>
+<p><%= bp.intro[0..10] -%> [<%= link_to 'Lees', admin_blog_post_url(bp)%> | <%= link_to 'Wijzig', edit_admin_blog_post_url(bp) -%>]</p>
+<% else -%>
+	<% end -%>
+<% end%>
+</div>
+</div>

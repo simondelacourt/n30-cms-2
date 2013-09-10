@@ -1,0 +1,25 @@
+<%= render :partial =>'admin/shared/settings_navbar' -%>
+<h2>Templates</h2>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Template</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+	
+	<tbody>
+		<% @templates.each do |t| %>
+		<tr>
+		<td><%= link_to t.title, admin_template_url(t) -%></td>
+		<td>
+		</td>
+		</tr>
+		
+		<% end -%>
+</tbody>
+</table>
+<nav class="opmenu">
+<%= link_to raw('<i class="icon-plus"></i> Nieuw template'), new_admin_template_url, :class => 'btn btn-default' -%>
+</nav>
+

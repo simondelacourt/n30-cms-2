@@ -1,0 +1,21 @@
+<%= render :partial =>'admin/shared/settings_navbar' -%>
+<h2>Instellingen</h2>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Instelling</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+	
+	<tbody>
+		<% @settings.each do |s| %>
+		<tr>
+		<td><%= link_to s.title, edit_admin_setting_url(s) -%></td>
+		<td>
+		</td>
+		</tr>
+		
+		<% end -%>
+</tbody>
+</table>

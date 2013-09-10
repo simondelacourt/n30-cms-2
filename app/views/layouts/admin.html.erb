@@ -30,7 +30,8 @@
 					<li<% if params[:controller].match('admin\/menu.*')%> class="active"<% end -%>><%= link_to raw('<i class="icon-sitemap"></i> Menus'), admin_menus_url -%></li>
 					<li<% if params[:id].to_i != current_user.id && params[:controller].match('admin\/users.*') -%> class="active"<% end -%>><%= link_to raw('<i class="icon-group"></i> Gebruikers'), admin_users_url -%></li>
 					<li<% if params[:controller] == 'admin/users' && params[:id].to_i == current_user.id %> class="active"<% end -%>><%= link_to raw('<i class="icon-user"></i> Mijn profiel'), edit_admin_user_url(current_user.id) -%></li>
-					
+			  		<li<% if params[:controller].match('admin\/settings.*')%> class="active"<% end -%>><%= link_to raw('<i class="icon-cogs"></i> Instellingen'), admin_settings_url -%></li>
+				
 		  		</ul>
 	    		<ul class="nav navbar-nav navbar-right">
 	     		   <li><%= link_to raw('<i class="icon-signout"></i> Uitloggen'), destroy_user_session_path, :method => :delete %></li>

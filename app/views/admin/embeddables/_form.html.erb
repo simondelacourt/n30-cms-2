@@ -40,7 +40,34 @@
 
 
 <% else %>
-<%= form_for [:admin, :page, @embeddable], :html => { :multipart => true } do |form| %>
-  <%= form.file_field :avatar %>
+<%= form_for [:admin, :page, @embeddable], :html => { :multipart => true, :role => 'form',  class: "form-horizontal"}, :remote => true do |f| %>
+<div class="form-group">
+	<%= f.label :title, :class => 'col-lg-1 control-label'%>
+    <div class="col-lg-11">
+		<%= f.text_field :title, :class => "form-control"%>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label 'Beschrijving', :class => 'col-lg-1 control-label'%>
+    <div class="col-lg-11">
+		<%= f.text_area :description, :class => "form-control", :rows => 5%>
+	</div>
+</div>
+
+<%= f.hidden_field :linkmode, :value => @mode%>
+<div class="form-group">
+	<%= f.label 'Bestand', :class => 'col-lg-1 control-label'%>
+    <div class="col-lg-11">
+  <%= f.file_field :image, :class => "form-control" %>
+</div>
+</div>
+<div class="form-group">
+  <div class="col-lg-offset-1 col-lg-11">
+      <%= f.submit :class => "btn btn-default" %>
+  </div>
+</div>
+
+  
 <% end %>
+
 <% end -%>

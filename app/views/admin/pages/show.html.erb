@@ -17,8 +17,12 @@
 	<div class="row">
 	
 	<% @embeddables.each do |e| %>
+	<% if e.linkmode == 'link'%>
 	<div class="col-md-3 embedblock"><%= image_tag(embedify(e.htmlbody, 180)['thumbnail_url']) -%></div>
+	<% else %>
+	<div class="col-md-3 embedblock"><%= image_tag(e.image(:thumb)) -%></div>
 	
+	<% end %>
 	<% end -%>
 </div>
 </section>

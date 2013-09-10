@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130905143031) do
+ActiveRecord::Schema.define(:version => 20130910101704) do
 
   create_table "blog_categories", :force => true do |t|
     t.string   "title"
@@ -105,6 +105,15 @@ ActiveRecord::Schema.define(:version => 20130905143031) do
 
   add_index "pages", ["ancestry"], :name => "index_pages_on_ancestry"
 
+  create_table "settings", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "mode"
+    t.text     "settings"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -120,6 +129,14 @@ ActiveRecord::Schema.define(:version => 20130905143031) do
 
   create_table "tags", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "templates", :force => true do |t|
+    t.string   "title"
+    t.boolean  "default"
+    t.text     "template"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

@@ -1,0 +1,2 @@
+module Admin::ThumbnailsHelper
+end

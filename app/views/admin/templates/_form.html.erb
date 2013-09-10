@@ -17,6 +17,28 @@
 	</div>
 </div>
 <div class="form-group">
+  <div class="col-lg-offset-1 col-lg-11">
+    <div class="checkbox">
+      <label>
+        <%= f.check_box :default %> Standaard template
+      </label>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-lg-offset-1 col-lg-11">
+	  <ul class="list-inline">
+	    <li>Pagina titel <strong>[title]</strong></li>
+		<li>CSS files <strong>[css]</strong></li>
+		<li>JS files <strong>[js]</strong></li>
+		<li>Content <strong>[body]</strong></li>
+		<li>CSRF <strong>[csrf]</strong></li>
+		<li>Menu <strong>[mainmenu]</strong></li>
+		<li>Sublevel menus <strong>[menu_1]</strong></li>
+	  </ul>
+  </div>
+</div>
+<div class="form-group">
 	<%= f.label :template, :class => 'col-lg-1 control-label'%>
     <div class="col-lg-11">
 		<%= f.text_area :template, :class => "form-control", :rows => 40, :cols => 80%>

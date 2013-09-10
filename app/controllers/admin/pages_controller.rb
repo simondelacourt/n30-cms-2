@@ -17,24 +17,37 @@ class Admin::PagesController < ApplicationController
       @embeddables = Embeddable.where(page_id: params[:id])
     end
   end
-  def destroy
-    
-  end
   def new
     @page = Page.new
     if params[:parent_id]
       @page.parent_id = params[:parent_id]
     end
   end
+  def edit
+    @page = Page.find(params[:id])
+  end
   def create
     @page = Page.new(params[:page])
     if @page.save
-      redirect_to admin_page_path(@page)
+      redirect_to admin_page_url(@page)
     else
       render action: new
     end
   end
   def update
-    
+    @page = Page.find(params[:id])
+    if @page.update_attributes(params[:page])
+      flash[:notice] = 'Pagina gewijzigd'
+      redirect_to admin_page_url(@page)
+      
+    else
+      render action: 'edit'
+    end
   end
+  def destroy
+    @page = Page.find(params[:id])
+    @page.delete
+    redirect_to admin_pages_url
+  end
+  
 end

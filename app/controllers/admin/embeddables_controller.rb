@@ -28,4 +28,24 @@ class Admin::EmbeddablesController < ApplicationController
       end
     end
   end
+  def edit
+    @embeddable = Embeddable.find(params[:id])
+  end
+  def update
+    @embeddable = Embeddable.find(params[:id])
+    if @embeddable.update_attributes(params[:embeddable])
+      
+      respond_to do |format|
+        format.html { redirect_to admin_page_url(params[:page_id]) }
+        format.js {}
+      end
+      
+    else
+      respond_to do |format|
+        format.html { render :edit }
+        format.js {}
+      end
+    end
+        
+  end
 end

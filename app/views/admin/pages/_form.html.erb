@@ -1,35 +1,41 @@
 <%= form_for [:admin, @page], html: {role: "form", class: "form-horizontal"}  do |f| -%>
 <% if @page.errors.any? %>
 <div id="errorExplanation" class="well">
-  <h4><%= pluralize(@page.errors.count, "error") %> prohibited this record from being saved:</h4>
-  <ul>
-  <% @page.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-  <% end %>
-  </ul>
+	<h4><%= pluralize(@page.errors.count, "error") %> prohibited this record from being saved:</h4>
+	<ul>
+		<% @page.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
 </div>
 <% end %>
 
 <div class="form-group">
 	<%= f.label :title, :class => 'col-lg-1 control-label'%>
-    <div class="col-lg-11">
+	<div class="col-lg-11">
 		<%= f.text_field :title, :class => "form-control"%>
 	</div>
 </div>
+<%= render partial: 'shared/wmenubar', :locals => {:barid => 'wysihtml5-toolbar'}%>
 <div class="form-group">
 	<%= f.label :body, :class => 'col-lg-1 control-label'%>
-    <div class="col-lg-11">
+	<div class="col-lg-11">
 		<%= f.text_area :body, :class => "form-control", :rows => 20, :cols => 80%>
 	</div>
 </div>
+<script>
+$(document).ready(function () {
 
-
-
-        <%= f.hidden_field :parent_id%>
-		
-		<div class="form-group">
-		  <div class="col-lg-offset-1 col-lg-11">
-		      <%= f.submit :class => "btn btn-default" %>
-		  </div>
-		</div>
+var editor = new wysihtml5.Editor("page_body", { // id of textarea element
+  toolbar:      "wysihtml5-toolbar", // id of toolbar element
+  parserRules:  wysihtml5ParserRules // defined in parser rules set 
+});
+});
+</script>
+<%= f.hidden_field :parent_id%>
+<div class="form-group">
+	<div class="col-lg-offset-1 col-lg-11">
+		<%= f.submit :class => "btn btn-default" %>
+	</div>
+</div>
 <% end -%>

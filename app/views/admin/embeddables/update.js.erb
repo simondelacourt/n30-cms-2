@@ -1,0 +1,7 @@
+// Display a Javascript alert
+<% if @error -%>
+	alert('!success!');
+<% else -%>
+window.location.href = "<%= url_for admin_page_url(@embeddable.page_id) -%>";
+
+<% end -%>

@@ -48,6 +48,5 @@ class Admin::MenusController < ApplicationController
         render :json => {:status => 'ok'}
       }
     end
-    
   end
 end

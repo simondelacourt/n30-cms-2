@@ -2,7 +2,20 @@ class Embeddable < ActiveRecord::Base
   attr_accessible :title, :body, :htmlbody, :linkmode, :description, :image
   belongs_to :page
   
-  has_attached_file :image, :styles => {:large => '1000x1000>', :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
   
   validates :title, presence: true
+  
+  has_attached_file :image, :styles => Proc.new { |clip| clip.instance.attachment_sizes }
+
+  
+  def attachment_sizes
+    sizes = { :thumb => "100x100" }
+    tm = ThumbStyle.find(:all)
+    tm.each do |size|
+      sizes[:"#{size.title}"] = [size.sizes]
+    end
+    sizes
+  end
+  
+  
 end

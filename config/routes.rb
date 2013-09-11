@@ -28,6 +28,8 @@ Simondelacourt::Application.routes.draw do
     resources :settings do
       collection do
         resources :templates
+        resources :thumb_styles, :controller => :thumbnails, :path => 'thumbnails'
+        resources :stylesheets
       end
     end
   end

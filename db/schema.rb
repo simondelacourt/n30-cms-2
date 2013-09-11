@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130910113724) do
+ActiveRecord::Schema.define(:version => 20130910123217) do
 
   create_table "blog_categories", :force => true do |t|
     t.string   "title"
@@ -112,6 +112,14 @@ ActiveRecord::Schema.define(:version => 20130910113724) do
     t.text     "settings"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "stylesheets", :force => true do |t|
+    t.string   "title"
+    t.boolean  "selected"
+    t.text     "css"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "taggings", :force => true do |t|

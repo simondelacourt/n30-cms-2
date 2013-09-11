@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130911130814) do
+ActiveRecord::Schema.define(:version => 20130911150854) do
 
   create_table "blog_categories", :force => true do |t|
     t.string   "title"
@@ -83,8 +83,9 @@ ActiveRecord::Schema.define(:version => 20130911130814) do
   create_table "javascripts", :force => true do |t|
     t.string   "title"
     t.text     "script"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.text     "external_link"
   end
 
   create_table "menus", :force => true do |t|
@@ -125,8 +126,9 @@ ActiveRecord::Schema.define(:version => 20130911130814) do
     t.string   "title"
     t.boolean  "selected"
     t.text     "css"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.text     "external_link"
   end
 
   create_table "taggings", :force => true do |t|
@@ -164,8 +166,13 @@ ActiveRecord::Schema.define(:version => 20130911130814) do
     t.string   "title"
     t.boolean  "default"
     t.text     "template"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
+    t.string   "head_title",       :default => "[title] - [pagetitle]"
+    t.text     "head_extra"
+    t.string   "meta_keywords"
+    t.string   "meta_description"
+    t.string   "meta_author"
   end
 
   create_table "thumb_styles", :force => true do |t|

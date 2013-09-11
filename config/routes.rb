@@ -1,6 +1,12 @@
 Simondelacourt::Application.routes.draw do
   
 
+  get "javascripts/index"
+
+  get "javascripts/edit"
+
+  get "javascripts/new"
+
   root :to => 'blog#index'
   match 'feed' => 'home#feed', :as => 'feed'
   
@@ -30,6 +36,7 @@ Simondelacourt::Application.routes.draw do
         resources :templates
         resources :thumb_styles, :controller => :thumbnails, :path => 'thumbnails'
         resources :stylesheets
+        resources :javascripts
       end
     end
   end

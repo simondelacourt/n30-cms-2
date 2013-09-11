@@ -11,41 +11,69 @@
 <% end %>
 
 <div class="form-group">
-	<%= f.label :title, :class => 'col-lg-1 control-label'%>
-    <div class="col-lg-11">
+	<%= f.label :title, :class => 'col-lg-2 control-label'%>
+    <div class="col-lg-10">
 		<%= f.text_field :title, :class => "form-control"%>
 	</div>
 </div>
 <div class="form-group">
-  <div class="col-lg-offset-1 col-lg-11">
+	<%= f.label "Pagina titel", :class => 'col-lg-2 control-label'%>
+    <div class="col-lg-10">
+		<%= f.text_field :head_title, :class => "form-control"%>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label 'Verbonden stylesheets', :class => 'col-lg-2 control-label'%>
+	<div class="col-lg-10">
+		<% Stylesheet.all.each do |s| %>
+		<label class="checkbox-inline"><%= check_box_tag :stylesheet_ids, s.id, @template.stylesheets.include?(s), :name => 'template[stylesheet_ids][]' -%> <%= s.title -%></label>
+		<% end -%>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label 'Verbonden javascripts', :class => 'col-lg-2 control-label'%>
+	<div class="col-lg-10">
+		  <% Javascript.all.each do |j| %>
+	    <label class="checkbox-inline"><%= check_box_tag :javascript_ids, j.id, @template.javascripts.include?(j), :name => 'template[javascript_ids][]' -%><%= s.title -%></label>
+		<% end -%>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label 'Standaard template', :class => 'col-lg-2 control-label'%>
+  <div class="col-lg-10">
     <div class="checkbox">
       <label>
-        <%= f.check_box :default %> Standaard template
+        <%= f.check_box :default %>
       </label>
     </div>
   </div>
 </div>
 <div class="form-group">
-  <div class="col-lg-offset-1 col-lg-11">
-	  <ul class="list-inline">
-	    <li>Pagina titel <strong>[title]</strong></li>
-		<li>CSS files <strong>[css]</strong></li>
-		<li>JS files <strong>[js]</strong></li>
-		<li>Content <strong>[body]</strong></li>
-		<li>CSRF <strong>[csrf]</strong></li>
-		<li>Menu <strong>[mainmenu]</strong></li>
-		<li>Sublevel menus <strong>[menu_1]</strong></li>
-	  </ul>
-  </div>
-</div>
-<div class="form-group">
-	<%= f.label :template, :class => 'col-lg-1 control-label'%>
-    <div class="col-lg-11">
+	<%= f.label :template, :class => 'col-lg-2 control-label'%>
+    <div class="col-lg-10">
 		<%= f.text_area :template, :class => "form-control", :rows => 40, :cols => 80%>
 	</div>
 </div>
+<div class="form-group">
+	<%= f.label "META Sleutelwoorden", :class => 'col-lg-2 control-label'%>
+    <div class="col-lg-10">
+		<%= f.text_field :meta_keywords, :class => "form-control"%>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label "META Beschrijving", :class => 'col-lg-2 control-label'%>
+    <div class="col-lg-10">
+		<%= f.text_field :meta_description, :class => "form-control"%>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label "META Auteur", :class => 'col-lg-2 control-label'%>
+    <div class="col-lg-10">
+		<%= f.text_field :meta_keywords, :class => "form-control"%>
+	</div>
+</div>
 		<div class="form-group">
-		  <div class="col-lg-offset-1 col-lg-11">
+		  <div class="col-lg-offset-2 col-lg-10">
 		      <%= f.submit :class => "btn btn-default" %>
 		  </div>
 		</div>

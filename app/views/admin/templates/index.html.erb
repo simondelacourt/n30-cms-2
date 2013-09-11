@@ -1,5 +1,4 @@
 <%= render :partial =>'admin/shared/settings_navbar' -%>
-<h2>Templates</h2>
 <table class="table">
     <thead>
       <tr>
@@ -11,7 +10,7 @@
 	<tbody>
 		<% @templates.each do |t| %>
 		<tr>
-		<td><%= link_to t.title, admin_template_url(t) -%></td>
+		<td><%= link_to t.title, edit_admin_template_url(t) -%></td>
 		<td>
 		</td>
 		</tr>

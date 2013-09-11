@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130910123217) do
+ActiveRecord::Schema.define(:version => 20130911130814) do
 
   create_table "blog_categories", :force => true do |t|
     t.string   "title"
@@ -80,6 +80,13 @@ ActiveRecord::Schema.define(:version => 20130910123217) do
     t.datetime "image_updated_at"
   end
 
+  create_table "javascripts", :force => true do |t|
+    t.string   "title"
+    t.text     "script"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "menus", :force => true do |t|
     t.text     "title"
     t.text     "linkmode"
@@ -137,6 +144,20 @@ ActiveRecord::Schema.define(:version => 20130910123217) do
 
   create_table "tags", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "template_scripts", :force => true do |t|
+    t.integer  "template_id"
+    t.integer  "javascript_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "template_sheets", :force => true do |t|
+    t.integer  "template_id"
+    t.integer  "stylesheet_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "templates", :force => true do |t|

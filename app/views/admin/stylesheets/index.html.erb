@@ -5,7 +5,6 @@
       <tr>
 		  
         <th>Titel</th>
-		<th>Aan?</th>
 		<th></th>
       </tr>
     </thead>
@@ -13,7 +12,6 @@
 		<% @stylesheets.each do |s| %>
 		<tr>
 			<td><%= link_to s.title, edit_admin_stylesheet_url(s)  -%></td>
-			<td><%= s.selected -%></td>
 			<td><div class="btn-group pull-right"><%= link_to 'Verwijder', admin_stylesheet_url(s), method: :delete, :action => 'destroy', :confirm => 'Weet u zeker dat u de stylesheet wilt verwijderen', :class => 'btn btn-default btn-sm' %></div></td>
 		</tr>
 		<% end %>

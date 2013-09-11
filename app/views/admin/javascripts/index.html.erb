@@ -1,2 +1,22 @@
-<h1>Admin::Javascripts#index</h1>
-<p>Find me in app/views/admin/javascripts/index.html.erb</p>
+<%= render :partial =>'admin/shared/settings_navbar' -%>
+<h2>Javascripts</h2>
+<table class="table table-hover table-striped">
+    <thead>
+      <tr>
+		  
+        <th>Titel</th>
+		<th></th>
+      </tr>
+    </thead>
+	<tbody>
+		<% @javascripts.each do |j| %>
+		<tr>
+			<td><%= link_to j.title, edit_admin_javascript_url(j)  -%></td>
+			<td><div class="btn-group pull-right"><%= link_to 'Verwijder', admin_javascript_url(j), method: :delete, :action => 'destroy', :confirm => 'Weet u zeker dat u de javascript wilt verwijderen', :class => 'btn btn-default btn-sm' %></div></td>
+		</tr>
+		<% end %>
+</tbody>
+</table>
+<nav class="opmenu">
+<%= link_to raw('<i class="icon-plus"></i> Nieuwe javascript'), new_admin_javascript_url, :class => 'btn btn-default' -%>
+</nav>

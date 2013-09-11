@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130911150854) do
+ActiveRecord::Schema.define(:version => 20130911184236) do
 
   create_table "blog_categories", :force => true do |t|
     t.string   "title"
@@ -125,9 +125,9 @@ ActiveRecord::Schema.define(:version => 20130911150854) do
   create_table "stylesheets", :force => true do |t|
     t.string   "title"
     t.boolean  "selected"
-    t.text     "css"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.text     "css",           :limit => 2147483647
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.text     "external_link"
   end
 
@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20130911150854) do
     t.integer  "javascript_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "ordernum"
   end
 
   create_table "template_sheets", :force => true do |t|
@@ -160,15 +161,16 @@ ActiveRecord::Schema.define(:version => 20130911150854) do
     t.integer  "stylesheet_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "ordernum"
   end
 
   create_table "templates", :force => true do |t|
     t.string   "title"
-    t.boolean  "default"
+    t.string   "head_title",       :default => "[title] - [pagetitle]"
+    t.boolean  "tdefault"
     t.text     "template"
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
-    t.string   "head_title",       :default => "[title] - [pagetitle]"
     t.text     "head_extra"
     t.string   "meta_keywords"
     t.string   "meta_description"

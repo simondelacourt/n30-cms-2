@@ -17,6 +17,10 @@ class Admin::TemplatesController < ApplicationController
   def create
     @template = Template.new(params[:template])
     if @template.save
+      if params[:template][:tdefault]
+        @template.setdefaulttemplate
+      end
+      
       redirect_to admin_templates_url
     else
       render action: 'new'
@@ -25,7 +29,9 @@ class Admin::TemplatesController < ApplicationController
   def update
     @template = Template.find(params[:id])
     @template.attributes = {'stylesheet_ids' => []}.merge(params[:template] || {})
-    
+    if params[:template][:tdefault]
+      @template.setdefaulttemplate
+    end
     if @template.update_attributes(params[:template])
       redirect_to edit_admin_template_url(@template)
     else
@@ -37,5 +43,42 @@ class Admin::TemplatesController < ApplicationController
     @template.delete
     redirect_to admin_templates_url
   end
+  
+  def savecssorder
+    respond_to do |format|
+      format.html
+      format.json {
+        data =  params[:order].split(".")
+        counter = 0
+        data.each do |d|
+          counter += 1
+          currentid = d[4..d.length+1]
+          css = TemplateSheet.find(currentid)
+          css.update_attribute(:ordernum, counter)
+        end
+        
+        render :json => {:status => 'ok'}
+      }
+    end
+  end
+  def savejsorder
+    respond_to do |format|
+      format.html
+      format.json {
+        data =  params[:order].split(".")
+        counter = 0
+        data.each do |d|
+          counter += 1
+          currentid = d[4..d.length+1]
+          js = TemplateScript.find(currentid)
+          js.update_attribute(:ordernum, counter)
+        end
+        
+        render :json => {:status => 'ok'}
+      }
+    end
+  end
+
+
 
 end

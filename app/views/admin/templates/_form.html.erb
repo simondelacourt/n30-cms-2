@@ -23,27 +23,11 @@
 	</div>
 </div>
 <div class="form-group">
-	<%= f.label 'Verbonden stylesheets', :class => 'col-lg-2 control-label'%>
-	<div class="col-lg-10">
-		<% Stylesheet.all.each do |s| %>
-		<label class="checkbox-inline"><%= check_box_tag :stylesheet_ids, s.id, @template.stylesheets.include?(s), :name => 'template[stylesheet_ids][]' -%> <%= s.title -%></label>
-		<% end -%>
-	</div>
-</div>
-<div class="form-group">
-	<%= f.label 'Verbonden javascripts', :class => 'col-lg-2 control-label'%>
-	<div class="col-lg-10">
-		  <% Javascript.all.each do |j| %>
-	    <label class="checkbox-inline"><%= check_box_tag :javascript_ids, j.id, @template.javascripts.include?(j), :name => 'template[javascript_ids][]' -%><%= s.title -%></label>
-		<% end -%>
-  </div>
-</div>
-<div class="form-group">
   <%= f.label 'Standaard template', :class => 'col-lg-2 control-label'%>
   <div class="col-lg-10">
     <div class="checkbox">
       <label>
-        <%= f.check_box :default %>
+        <%= f.check_box :tdefault %>
       </label>
     </div>
   </div>
@@ -53,6 +37,27 @@
     <div class="col-lg-10">
 		<%= f.text_area :template, :class => "form-control", :rows => 40, :cols => 80%>
 	</div>
+</div>
+<div class="form-group">
+	<%= f.label 'Verbonden stylesheets', :class => 'col-lg-2 control-label'%>
+	<div class="col-lg-10">
+		<ul id="stylesheets">
+		<% Stylesheet.find(:all, :include => [:template_sheets], :order => 'template_sheets.ordernum ASC').each do |s| %>
+		<li <% if @template.stylesheets.include?(s) -%> class="csitem" id="crt_<%= @template.template_sheets.find_by_stylesheet_id(s.id).id %>"<% end -%>><label class="checkbox-inline"><%= check_box_tag :stylesheet_ids, s.id, @template.stylesheets.include?(s), :name => 'template[stylesheet_ids][]' -%> <%= s.title -%></label></li>
+		<% end -%>
+		</ul>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label 'Verbonden javascripts', :class => 'col-lg-2 control-label'%>
+	<div class="col-lg-10">
+		<ul id="javascripts">
+		  <% Javascript.all.each do |j| %>
+		  <%= @template.javascripts.include?(j).inspect %>
+	    <li class="cjitem" id="crt_"><label class="checkbox-inline"><%= check_box_tag :javascript_ids, j.id, @template.javascripts.include?(j), :name => 'template[javascript_ids][]' -%><%= j.title -%></label></li>
+		<% end -%>
+		</ul>
+  </div>
 </div>
 <div class="form-group">
 	<%= f.label "META Sleutelwoorden", :class => 'col-lg-2 control-label'%>
@@ -72,9 +77,50 @@
 		<%= f.text_field :meta_keywords, :class => "form-control"%>
 	</div>
 </div>
+
 		<div class="form-group">
 		  <div class="col-lg-offset-2 col-lg-10">
 		      <%= f.submit :class => "btn btn-default" %>
 		  </div>
 		</div>
 <% end -%>
+<% if params[:action] == 'edit'%>
+<script>
+
+function getIds () {
+	var ids = [];
+    $('.csitem').each(function(){
+        ids[ids.length] = $(this).attr('id');
+    });
+	return ids.join('.')
+}
+
+
+// Return a helper with preserved width of cells
+var fixHelper = function(e, ui) {
+    ui.children().each(function() {
+        $(this).width($(this).width());
+    });
+    return ui;
+};
+
+$("#stylesheets").sortable({
+    helper: fixHelper,
+    update: function(event, ui) {
+        $.get('<%= url_for admin_template_savecssorder_url(:template_id => params[:id], :format => 'json') -%>', {order:getIds});
+    }
+}).disableSelection();
+
+var fixHelperModified = function(e, tr) {
+    var $originals = tr.children();
+    var $helper = tr.clone();
+    $helper.children().each(function(index)
+    {
+      $(this).width($originals.eq(index).width())
+    });
+    return $helper;
+};
+
+</script>
+<% end -%>
+

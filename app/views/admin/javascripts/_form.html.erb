@@ -1,9 +1,9 @@
-<%= form_for [:admin, @stylesheet], html: {role: "form", class: "form-horizontal"}  do |f| -%>
-<% if @stylesheet.errors.any? %>
+<%= form_for [:admin, @javascript], html: {role: "form", class: "form-horizontal"}  do |f| -%>
+<% if @javascript.errors.any? %>
 <div id="errorExplanation" class="well">
-  <h4><%= pluralize(@stylesheet.errors.count, "error") %> prohibited this record from being saved:</h4>
+  <h4><%= pluralize(@javascript.errors.count, "error") %> prohibited this record from being saved:</h4>
   <ul>
-  <% @stylesheet.errors.full_messages.each do |msg| %>
+  <% @javascript.errors.full_messages.each do |msg| %>
     <li><%= msg %></li>
   <% end %>
   </ul>
@@ -23,9 +23,9 @@
 	</div>
 </div>
 <div class="form-group">
-	<%= f.label :css, :class => 'col-lg-1 control-label'%>
+	<%= f.label :script, :class => 'col-lg-1 control-label'%>
     <div class="col-lg-11">
-		<%= f.text_area :css, :class => "form-control", :rows => 40, :cols => 80%>
+		<%= f.text_area :script, :class => "form-control", :rows => 40, :cols => 80%>
 	</div>
 </div>
 		<div class="form-group">

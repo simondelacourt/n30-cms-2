@@ -1,24 +1,25 @@
 <%= render :partial =>'admin/shared/settings_navbar' -%>
 <table class="table">
-    <thead>
-      <tr>
-        <th>Template</th>
-        <th>&nbsp;</th>
-      </tr>
-    </thead>
+	<thead>
+		<tr>
+			<th>Template</th>
+			<th>Standaard</th>
+			<th>&nbsp;</th>
+		</tr>
+	</thead>
 	
 	<tbody>
 		<% @templates.each do |t| %>
 		<tr>
-		<td><%= link_to t.title, edit_admin_template_url(t) -%></td>
-		<td>
-		</td>
+			<td><%= link_to t.title, edit_admin_template_url(t) -%></td>
+			<td><% if t.tdefault -%><i class="icon-check-sign"></i><% else -%><i class="icon-check-empty"></i><% end -%>
+			<td><% unless t.tdefault -%><div class="btn-group pull-right"><%= link_to 'Verwijder', admin_template_url(t), method: :delete, :action => 'destroy', :confirm => 'Weet u zeker dat u de template wilt verwijderen', :class => 'btn btn-default btn-sm' %></div><% end -%></td>
 		</tr>
 		
 		<% end -%>
-</tbody>
+	</tbody>
 </table>
 <nav class="opmenu">
-<%= link_to raw('<i class="icon-plus"></i> Nieuw template'), new_admin_template_url, :class => 'btn btn-default' -%>
+	<%= link_to raw('<i class="icon-plus"></i> Nieuw template'), new_admin_template_url, :class => 'btn btn-default' -%>
 </nav>
 

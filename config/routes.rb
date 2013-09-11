@@ -1,14 +1,9 @@
 Simondelacourt::Application.routes.draw do
-  
-
-  get "javascripts/index"
-
-  get "javascripts/edit"
-
-  get "javascripts/new"
-
   root :to => 'blog#index'
-  match 'feed' => 'home#feed', :as => 'feed'
+  get 'feed' => 'home#feed', :as => 'feed'
+  get 'as/css/:id' => 'templatemanager#css', :as => 'cssfile'
+  get 'as/javascript/:id' => 'templatemanager#js', :as => 'jsfile'
+  
   
   devise_for :users, { :sessions => "sessions" }
   
@@ -33,7 +28,10 @@ Simondelacourt::Application.routes.draw do
     
     resources :settings do
       collection do
-        resources :templates
+        resources :templates do
+          get 'savecssorder'
+          get 'savejsorder'
+        end
         resources :thumb_styles, :controller => :thumbnails, :path => 'thumbnails'
         resources :stylesheets
         resources :javascripts

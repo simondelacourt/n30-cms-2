@@ -145,6 +145,7 @@ DEPENDENCIES
   mysql2
   ohembedr
   paperclip
+  rack-cache
   rails (= 3.2.13)
   rails3-jquery-autocomplete
   remotipart (~> 1.0)

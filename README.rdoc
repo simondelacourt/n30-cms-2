@@ -1,3 +1,1 @@
-== SJCMS: John Deer edition
-Siempies CMS
-
+== n30-cms 2 

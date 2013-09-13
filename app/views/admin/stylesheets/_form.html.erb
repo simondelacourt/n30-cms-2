@@ -1,45 +1,64 @@
-<%= form_for [:admin, @stylesheet], html: {role: "form", class: "form-horizontal"}  do |f| -%>
+<div class="navbar navbar-default navbar-fixed-top save-button">
+	<div class="container">
+		<p class="navbar-text savestatus" id="status"></p>
+		
+		<form class="navbar-form navbar-right" role="search">
+			<span class="btn btn-default" id="headsubmit">Opslaan</span>
+		</form>
+	</div>
+</div>
+
+<%= form_for [:admin, @stylesheet], remote: true, html: {role: "form", class: "form-horizontal"}  do |f| -%>
 <% if @stylesheet.errors.any? %>
 <div id="errorExplanation" class="well">
-  <h4><%= pluralize(@stylesheet.errors.count, "error") %> prohibited this record from being saved:</h4>
-  <ul>
-  <% @stylesheet.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-  <% end %>
-  </ul>
+	<h4><%= pluralize(@stylesheet.errors.count, "error") %> prohibited this record from being saved:</h4>
+	<ul>
+		<% @stylesheet.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
 </div>
 <% end %>
 <div class="form-group">
-  <div class="col-lg-offset-1 col-lg-11">
-      <%= f.submit :class => "btn btn-default" %>
-  </div>
-</div>
-<div class="form-group">
 	<%= f.label :title, :class => 'col-lg-1 control-label'%>
-    <div class="col-lg-11">
+	<div class="col-lg-11">
 		<%= f.text_field :title, :class => "form-control"%>
 	</div>
 </div>
 <div class="form-group">
 	<%= f.label "Externe link", :class => 'col-lg-1 control-label'%>
-    <div class="col-lg-11">
+	<div class="col-lg-11">
 		<%= f.text_field :external_link, :class => "form-control"%>
 	</div>
 </div>
 <div class="form-group">
 	<%= f.label :css, :class => 'col-lg-1 control-label'%>
-    <div class="col-lg-11">
+	<div class="col-lg-11">
 		<%= f.text_area :css, :rows => 80, :cols => 80, :class => "form-control"%>
 		
 	</div>
 </div>
-		<div class="form-group">
-		  <div class="col-lg-offset-1 col-lg-11">
-		      <%= f.submit :class => "btn btn-default" %>
-		  </div>
-		</div>
+<div class="form-group">
+	<div class="col-lg-offset-1 col-lg-11">
+		<%= f.submit :class => "btn btn-default stylesubmit" %>
+	</div>
+</div>
 		
 <% end -%>
 <script>
-  var editor = CodeMirror.fromTextArea(document.getElementById("stylesheet_css"), {lineNumbers: true});
+var editor = CodeMirror.fromTextArea(document.getElementById("stylesheet_css"), {lineNumbers: true});
+  
+  
+$('#headsubmit').click(function() {
+  $('#headsubmit').addClass('disabled');
+  $('.stylesubmit').addClass("disabled");
+  $('#edit_stylesheet_<%= @stylesheet.id -%>').submit();
+  
+});
+$('.stylesubmit').click(function() {
+   $('#edit_stylesheet_<%= @stylesheet.id -%>').submit();
+   $('.stylesubmit').addClass("disabled");
+})
+$('#edit_stylesheet_<%= @stylesheet.id -%>').ajaxSuccess(function() {});
+
 </script>

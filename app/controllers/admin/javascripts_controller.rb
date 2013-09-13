@@ -15,7 +15,10 @@ class Admin::JavascriptsController < ApplicationController
     @javascript = Javascript.new(params[:javascript])
     if @javascript.save
       @javascript.savetofile
-      redirect_to admin_javascripts_url
+      respond_to do |format| 
+        format.html {redirect_to edit_admin_javascript_url(@javascript)}
+        format.js { }
+      end    
     else
       render action: 'new'
     end
@@ -24,8 +27,10 @@ class Admin::JavascriptsController < ApplicationController
     @javascript = Javascript.find(params[:id])
     if @javascript.update_attributes(params[:javascript])
       @javascript.savetofile
-      
-      redirect_to edit_admin_javascript_url(@javascript)
+      respond_to do |format| 
+        format.html {redirect_to edit_admin_javascript_url(@javascript)}
+        format.js { }
+      end    
     else
       render action: 'edit'
     end

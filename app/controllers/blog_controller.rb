@@ -1,6 +1,6 @@
 class BlogController < ApplicationController
   def index
-    @blogposts = BlogPost.order("updated_at desc")
+    @blogposts = BlogPost.order("created_at desc")
     @bloggroups = BlogGroup.find(:all)
   end
   def show

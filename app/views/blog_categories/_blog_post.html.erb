@@ -1,0 +1,22 @@
+<article class="blog-message <%= barclass -%>">
+	<header>
+		<h2><%= link_to blog_post.title, blog_post_url(blog_post) -%></h2>
+		<ul class="postmeta">
+			<li class="writer">By <a href="#"><%= blog_post.user.firstname%> <%= blog_post.user.familyname%></a></li>
+			<li class="secondinfo date"><i class="icon-calendar"></i> <%= time_tag blog_post.created_at%></li>
+			<li class="secondinfo tags"><i class="icon-tag"></i> <%= raw blog_post.tag_list.map { |t| '<strong>'+t+'</strong>' }.join(', ') %></li>
+		</ul>
+	</header>
+	<% if blog_post.leaderimage.exists? -%>
+	<div class="imgbar">
+	<%= image_tag blog_post.leaderimage.url %>
+	</div>
+	<% end -%>
+	<p><% if rendermode == 'intro' -%>
+		<%= raw(blog_post.intro) -%>
+		<% else -%>
+		<%= raw(blog_post.body) -%>
+		
+		<% end -%>
+	</p>
+</article>

@@ -159,6 +159,7 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.1)
       rack (>= 1.0)
+    yui-compressor (0.11.0)
 
 PLATFORMS
   ruby
@@ -182,3 +183,4 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   therubyracer
   uglifier (>= 1.0.3)
+  yui-compressor

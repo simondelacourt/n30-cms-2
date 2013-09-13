@@ -148,43 +148,24 @@ body {
 	.mainitem .submenu .mitem:last-child {
 		border-bottom: none;
 	}
-	
 	.mainitem .submenu .mitem:nth-child(odd) {
 		background-color: #FAFAFA;
 	}
-	/*.mainitem {
-		padding: 10px;
-		background: white;
-		border-bottom: 1px solid #333;
-		list-style: none;
-		margin: 0px;
-		
-	}
-	li ul.submenu {
-		padding: 0px;
-		background-color: #EFEFEF;
-		margin-top: 14px;
-		border-left: 2px solid #999;
-		
-	}
-	
-	.mitem > li {
-	}
-	> li:first-child {
-		border-top: 1px solid #333;
-	}
-	> li ul.sitem {
-	}
-	> li ul.sitem li.mitem:nth-child(odd) {
-		background-color: #FAFAFA;
-	}
-	> li li:nth-child(even) {
-		background-color: #EFEFEF;
-	}
-	> li li {
-		list-style: none;
-		margin: 0px;
-	}*/
+}
+
+.save-button {
+	position: fixed;
+	-webkit-transform: translateZ(0) !important; 
+	opacity: 0.8;
+	z-index: 100;
+}
+.savestatus {
+	color: orange !important;
+}
+.savedmessage {
+	font-size: 0.4em;
+	color: green;
+	padding-left: 20px;
 }
 .embedblock {
 	border: 1px solid green;

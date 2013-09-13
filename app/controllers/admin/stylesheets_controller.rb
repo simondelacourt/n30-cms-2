@@ -15,7 +15,10 @@ class Admin::StylesheetsController < ApplicationController
     @stylesheet = Stylesheet.new(params[:stylesheet])
     if @stylesheet.save
       @stylesheet.savetofile
-      redirect_to edit_admin_stylesheet_url(@stylesheet)
+      respond_to do |format| 
+        format.html {redirect_to edit_admin_stylesheet_url(@stylesheet)}
+        format.js { }
+      end
     else
       render action: 'new'
     end
@@ -25,7 +28,10 @@ class Admin::StylesheetsController < ApplicationController
     if @stylesheet.update_attributes(params[:stylesheet])
       @stylesheet.savetofile
       
-      redirect_to edit_admin_stylesheet_url(@stylesheet)
+      respond_to do |format| 
+        format.html {redirect_to edit_admin_stylesheet_url(@stylesheet)}
+        format.js { }
+      end
     else
       render action: 'edit'
     end

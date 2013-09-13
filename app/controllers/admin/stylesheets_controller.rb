@@ -14,7 +14,8 @@ class Admin::StylesheetsController < ApplicationController
   def create
     @stylesheet = Stylesheet.new(params[:stylesheet])
     if @stylesheet.save
-      redirect_to admin_stylesheets_url
+      @stylesheet.savetofile
+      redirect_to edit_admin_stylesheet_url(@stylesheet)
     else
       render action: 'new'
     end
@@ -22,7 +23,9 @@ class Admin::StylesheetsController < ApplicationController
   def update
     @stylesheet = Stylesheet.find(params[:id])
     if @stylesheet.update_attributes(params[:stylesheet])
-      redirect_to admin_stylesheets_url
+      @stylesheet.savetofile
+      
+      redirect_to edit_admin_stylesheet_url(@stylesheet)
     else
       render action: 'edit'
     end

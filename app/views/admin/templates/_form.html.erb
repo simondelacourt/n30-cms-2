@@ -52,9 +52,8 @@
 	<%= f.label 'Verbonden javascripts', :class => 'col-lg-2 control-label'%>
 	<div class="col-lg-10">
 		<ul id="javascripts">
-		  <% Javascript.all.each do |j| %>
-		  <%= @template.javascripts.include?(j).inspect %>
-	    <li class="cjitem" id="crt_"><label class="checkbox-inline"><%= check_box_tag :javascript_ids, j.id, @template.javascripts.include?(j), :name => 'template[javascript_ids][]' -%><%= j.title -%></label></li>
+		  <% Javascript.find(:all, :include => [:template_scripts], :order => 'template_scripts.ordernum ASC').each do |j| %>
+		<li <% if @template.javascripts.include?(j) -%> class="jsitem" id="crt_<%= @template.template_scripts.find_by_javascript_id(j.id).id %>"<% end -%>><label class="checkbox-inline"><%= check_box_tag :javascript_ids, j.id, @template.javascripts.include?(j), :name => 'template[javascript_ids][]' -%> <%= j.title -%></label></li>
 		<% end -%>
 		</ul>
   </div>
@@ -87,14 +86,20 @@
 <% if params[:action] == 'edit'%>
 <script>
 
-function getIds () {
+function getCSSIds () {
 	var ids = [];
     $('.csitem').each(function(){
         ids[ids.length] = $(this).attr('id');
     });
 	return ids.join('.')
 }
-
+function getJSIds () {
+	var ids = [];
+    $('.jsitem').each(function(){
+        ids[ids.length] = $(this).attr('id');
+    });
+	return ids.join('.')
+}
 
 // Return a helper with preserved width of cells
 var fixHelper = function(e, ui) {
@@ -107,7 +112,14 @@ var fixHelper = function(e, ui) {
 $("#stylesheets").sortable({
     helper: fixHelper,
     update: function(event, ui) {
-        $.get('<%= url_for admin_template_savecssorder_url(:template_id => params[:id], :format => 'json') -%>', {order:getIds});
+        $.get('<%= url_for admin_template_savecssorder_url(:template_id => params[:id], :format => 'json') -%>', {order:getCSSIds});
+    }
+}).disableSelection();
+
+$("#javascripts").sortable({
+    helper: fixHelper,
+    update: function(event, ui) {
+        $.get('<%= url_for admin_template_savejsorder_url(:template_id => params[:id], :format => 'json') -%>', {order:getJSIds});
     }
 }).disableSelection();
 
@@ -123,4 +135,7 @@ var fixHelperModified = function(e, tr) {
 
 </script>
 <% end -%>
+<script>
+  var editor = CodeMirror.fromTextArea(document.getElementById("template_template"), {lineNumbers: true});
+</script>
 

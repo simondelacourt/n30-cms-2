@@ -10,14 +10,14 @@
 		
 	<% @sitetemplate.stylesheets.find(:all, :include => [:template_sheets], :order => 'template_sheets.ordernum ASC').each do |s| %>
 	<% if s.external_link.empty?%>
-	<%= stylesheet_link_tag    url_for(cssfile_url(s.id, :format => 'css')), :media => "all" %>
+	<%= stylesheet_link_tag   url_for(s.getfileurl), :media => "all" %>
 	<% else -%>
 	<%= stylesheet_link_tag    s.external_link, :media => "all" %>
 	<% end end -%>
 	
 	<% @sitetemplate.javascripts.each do |j| %>
 	<% if j.external_link.empty?%>
-	<%= javascript_include_tag    url_for(jsfile_url(j.id, :format => 'js')) %>
+	<%= javascript_include_tag    url_for(j.getfileurl) %>
 	<% else %>
 	<%= javascript_include_tag    j.external_link %>
 	<% end end -%>

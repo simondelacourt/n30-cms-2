@@ -1,9 +1,29 @@
-<ul class="nav navbar-nav">
+<ul class="nav navbar-nav sitemenu">
 	<% @sitemenu.each do |m| -%>
+	<% if m[1].count == 0%>
 	<% if m[0].linkmode == 'page'%>
 	<li><%= link_to m[0].title, page_url(Page.find_by_id(m[0].linkid)) -%></li>
 	<% else %>
 	<li><%= link_to m[0].title, m[0].externalink.sub(/\[home\]/, root_url) -%></li>
 	<% end -%>
+	<% else -%>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= m[0].title -%> <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+		  <% m[1].map do |ms| %>
+        <li>
+			<% if ms[0].linkmode == 'page'%>
+			<li><%= link_to ms[0].title, page_url(Page.find_by_id(ms[0].linkid)) -%></li>
+			<% else %>
+			<li><%= link_to ms[0].title, ms[0].externalink.sub(/\[home\]/, root_url) -%></li>
+			<% end -%>
+        	
+        </li>
+		<% end -%>
+      </ul>
+    </li>
+	
+	
+	<% end %>
 	<% end -%>
 </ul>

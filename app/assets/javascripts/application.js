@@ -12,4 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require autocomplete-rails
+//= require bootstrap.min
+//= require jquery-ui-1.10.3.custom.min
+//= require wysihtml5-0.3.0.min
+//= require admin/codemirror
+//= require admin/modes/css

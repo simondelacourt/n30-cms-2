@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130912154441) do
+ActiveRecord::Schema.define(:version => 20130913101350) do
 
   create_table "blog_categories", :force => true do |t|
     t.string   "title"
@@ -97,7 +97,10 @@ ActiveRecord::Schema.define(:version => 20130912154441) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.text     "external_link"
+    t.string   "slug"
   end
+
+  add_index "javascripts", ["slug"], :name => "index_javascripts_on_slug", :unique => true
 
   create_table "menus", :force => true do |t|
     t.text     "title"
@@ -142,7 +145,10 @@ ActiveRecord::Schema.define(:version => 20130912154441) do
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
     t.text     "external_link"
+    t.string   "slug"
   end
+
+  add_index "stylesheets", ["slug"], :name => "index_stylesheets_on_slug", :unique => true
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

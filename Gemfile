@@ -20,4 +20,5 @@ gem 'rails3-jquery-autocomplete'
 gem 'ohembedr'
 gem 'remotipart', "~> 1.0"
 gem 'rack-cache'
-
+gem 'friendly_id'
+gem "brakeman", :require => false

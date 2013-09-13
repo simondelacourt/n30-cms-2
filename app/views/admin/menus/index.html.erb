@@ -1,75 +1,94 @@
 <h2>Menu structuur</h2>
 <ul id="menustruct">
-		<% @menus.arrange(:order => :ordernum).each do |menu| %>
-		<li id="srt_<%= menu[0].id -%>" class="mitem">
-	          <%= link_to menu[0].title, admin_menu_url(menu[0]) -%>
-			  <div class="btn-group pull-right">
-			 <%= link_to raw('<i class="icon-edit"></i>  Wijzig menu'), edit_admin_menu_url(menu[0]), :class=> 'btn btn-default btn-xs'%>
-			 <%= link_to raw('<i class="icon-delete"></i>  Verwijder menu'), admin_menu_url(menu[0]), :confirm => 'Weet je het zeker?', method: :delete, :action => 'destroy', :class=> 'btn btn-default btn-xs'%>
-			 <%= link_to raw('<i class="icon-plus"></i>  Nieuwe menu'), new_admin_menu_url(:parent_id => menu[0]), :class=> 'btn btn-default btn-xs'%>
-		 </div>
-			<% unless menu[1].empty? %>
-			<ul id="ct_<%= menu[0].id -%>">
+	<% @menus.arrange(:order => :ordernum).each do |menu| %>
+	<li id="srt_<%= menu[0].id -%>" class="mitem mainitem">
+		<div class="menutitle"><%= link_to menu[0].title, admin_menu_url(menu[0]) -%>
+			<div class="btn-group pull-right">
+				<%= link_to raw('<i class="icon-edit"></i>  Wijzig menu'), edit_admin_menu_url(menu[0]), :class=> 'btn btn-default btn-xs'%>
+				<%= link_to raw('<i class="icon-remove-sign"></i>  Verwijder menu'), admin_menu_url(menu[0]), :confirm => 'Weet je het zeker?', method: :delete, :action => 'destroy', :class=> 'btn btn-default btn-xs'%>
+		 
+		  
+				<button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+					<i class="icon-plus"></i> Nieuw menu item <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li><%= link_to raw('Nieuwe pagina-link'), new_admin_menu_url(:parent_id => menu[0], :linkmode => 'page')%></li>
+					<li><%= link_to raw('Nieuwe externe-link'), new_admin_menu_url(:parent_id => menu[0], :linkmode => 'external')%></li>
+					
+				</ul>
+			</div>
+		</div>
+		<% unless menu[1].empty? %>
+		<ul id="ct_<%= menu[0].id -%>" class="submenu">
 			<% menu[1].each do |submenu| -%>
 			<li id="srt_<%= submenu[0].id -%>" class="mitem">
 				<%= submenu[0].title -%>
 				<div class="btn-group pull-right">
-				 <%= link_to raw('<i class="icon-edit"></i>  Wijzig menu'), edit_admin_menu_url(submenu[0]), :class=> 'btn btn-default btn-xs'%>
-				 <%= link_to raw('<i class="icon-delete"></i>  Verwijder menu'), admin_menu_url(submenu[0]), :confirm => 'Weet je het zeker?', method: :delete, :action => 'destroy', :class=> 'btn btn-default btn-xs'%>
-			 </div>
-			 </li>
+					<%= link_to raw('<i class="icon-edit"></i>  Wijzig menu'), edit_admin_menu_url(submenu[0]), :class=> 'btn btn-default btn-xs'%>
+					<%= link_to raw('<i class="icon-remove-sign"></i>  Verwijder menu'), admin_menu_url(submenu[0]), :confirm => 'Weet je het zeker?', method: :delete, :action => 'destroy', :class=> 'btn btn-default btn-xs'%>
+				</div>
+			</li>
 			<% end  -%>
-			</ul>
-			<% end -%>
-		</li>
+		</ul>
+		<% end -%>
+	</li>
 	<% end -%>
 </ul>
 	
-	<nav class="opmenu">
-<%= link_to raw('<i class="icon-plus"></i> Nieuw menu item'), new_admin_menu_url, :class => 'btn btn-default' -%>
+<nav class="opmenu">
+	<div class="btn-group pull-right">
+		<button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+			<i class="icon-plus"></i> Nieuw menu item <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			<li><%= link_to raw('Nieuwe pagina-link'), new_admin_menu_url(:linkmode => 'page')%></li>
+			<li><%= link_to raw('Nieuwe externe-link'), new_admin_menu_url(:linkmode => 'external')%></li>
+		
+		</ul>
+	</div>
 </nav>
 
 <script>
 
 function getIds () {
 	var ids = [];
-    $('.mitem').each(function(){
-        ids[ids.length] = $(this).attr('id');
-    });
+	$('.mitem').each(function(){
+		ids[ids.length] = $(this).attr('id');
+	});
 	return ids.join('.')
 }
 
 
 $("#menustruct li > ul").sortable({
-    update: function(event, ui) {
-        $.get('<%= url_for saveorder_admin_menus_url(:format => 'json') -%>', {order:getIds});
-    }
+	update: function(event, ui) {
+		$.get('<%= url_for saveorder_admin_menus_url(:format => 'json') -%>', {order:getIds});
+	}
 }).disableSelection();
 
 
 // Return a helper with preserved width of cells
 var fixHelper = function(e, ui) {
-    ui.children().each(function() {
-        $(this).width($(this).width());
-    });
-    return ui;
+	ui.children().each(function() {
+		$(this).width($(this).width());
+	});
+	return ui;
 };
 
 $("#menustruct").sortable({
-    helper: fixHelper,
-    update: function(event, ui) {
-        $.get('<%= url_for saveorder_admin_menus_url(:format => 'json') -%>', {order:getIds});
-    }
+	helper: fixHelper,
+	update: function(event, ui) {
+		$.get('<%= url_for saveorder_admin_menus_url(:format => 'json') -%>', {order:getIds});
+	}
 }).disableSelection();
 
 var fixHelperModified = function(e, tr) {
-    var $originals = tr.children();
-    var $helper = tr.clone();
-    $helper.children().each(function(index)
-    {
-      $(this).width($originals.eq(index).width())
-    });
-    return $helper;
+	var $originals = tr.children();
+	var $helper = tr.clone();
+	$helper.children().each(function(index)
+	{
+		$(this).width($originals.eq(index).width())
+	});
+	return $helper;
 };
 
 </script>

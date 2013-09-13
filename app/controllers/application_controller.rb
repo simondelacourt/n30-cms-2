@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
       end
       
       # load menu
-      @sitemenu = Menu.arrange
+      @sitemenu = Menu.arrange(:order => :ordernum)
     end
   end
 end

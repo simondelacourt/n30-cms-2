@@ -4,6 +4,7 @@ Simondelacourt::Application.routes.draw do
   get 'as/css/:id' => 'templatemanager#css', :as => 'cssfile'
   get 'as/javascript/:id' => 'templatemanager#js', :as => 'jsfile'
   
+  resources :pages
   
   devise_for :users, { :sessions => "sessions" }
   

@@ -22,10 +22,9 @@
 		<%= f.text_field :external_link, :class => "form-control"%>
 	</div>
 </div>
-<div class="form-group">
+<div class="">
 	<%= f.label :css, :class => 'col-lg-1 control-label'%>
     <div class="col-lg-11">
-		<%= f.text_area :css, :class => "form-control", :rows => 40, :cols => 80%>
 	</div>
 </div>
 		<div class="form-group">
@@ -33,4 +32,10 @@
 		      <%= f.submit :class => "btn btn-default" %>
 		  </div>
 		</div>
+		<%= f.text_area :css, :rows => 40, :cols => 80%>
+		
 <% end -%>
+<script>
+var myCodeMirror = CodeMirror.fromTextArea(stylesheet_css);
+
+</script>

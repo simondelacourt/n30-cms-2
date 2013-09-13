@@ -1,6 +1,9 @@
 <ul class="nav navbar-nav">
-			<li><a href="#">home</a></li>
-			<li><a href="#">projecten</a></li>
-			<li><a href="#">fotografie</a></li>
-			<li><a href="#">geluid</a></li>
-		</ul>
+	<% @sitemenu.each do |m| -%>
+	<% if m[0].linkmode == 'page'%>
+	<li><%= link_to m[0].title, page_url(Page.find_by_id(m[0].linkid)) -%></li>
+	<% else %>
+	<li><%= link_to m[0].title, m[0].externalink.sub(/\[home\]/, root_url) -%></li>
+	<% end -%>
+	<% end -%>
+</ul>

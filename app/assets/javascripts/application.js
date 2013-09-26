@@ -18,3 +18,4 @@
 //= require wysihtml5-0.3.0.min
 //= require admin/codemirror
 //= require admin/modes/css
+//= require parser_rules/advanced.js

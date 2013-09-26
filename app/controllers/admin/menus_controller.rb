@@ -50,7 +50,7 @@ class Admin::MenusController < ApplicationController
   end
   def destroy
     @menu = Menu.find(params[:id])
-    @menu.delete
+    @menu.destroy
     redirect_to admin_menus_url
   end
   def saveorder

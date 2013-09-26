@@ -26,6 +26,7 @@
 	<%= csrf_meta_tags %>
 </head>
 <body>
-	<%= raw( @sitetemplate.template.sub(/\[content\]/, yield).sub(/\[menu\]/, render(:partial => 'layouts/menu') ) ) %>
+	
+	<%= raw( @sitelayout.to_s.sub(/\[content\]/, yield) ) %>
 </body>
 </html>

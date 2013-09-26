@@ -4,8 +4,8 @@ class Embeddable < ActiveRecord::Base
   validates :title, presence: true
   
   has_attached_file :image, :styles => Proc.new { |clip| clip.instance.attachment_sizes }
-
   
+
   def attachment_sizes
     sizes = { :thumb => "100x100" }
     tm = ThumbStyle.find(:all)
@@ -14,6 +14,11 @@ class Embeddable < ActiveRecord::Base
     end
     sizes
   end
+  def image_tag (test)
+    return test
+    
+  end
   
+
   
 end

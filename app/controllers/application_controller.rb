@@ -3,8 +3,19 @@ class ApplicationController < ActionController::Base
 
   before_filter :preload
   def preload
+    
+    
     @title = ''
     @pagetitle = ''
+    
+    
+    if current_user.nil?
+      if User.find(:all).count == 0
+        u = User.new(:email => "admin@admin.com", :password => 'defaultpassword', :password_confirmation => 'defaultpassword')
+        u.save!
+      end
+    end
+
     
     # settings
     titlesetting = Setting.find_by_title('title')
@@ -14,6 +25,8 @@ class ApplicationController < ActionController::Base
     
     # not admin so load template, menu
     unless self.class.parent.inspect == 'Admin'
+      # do any users exist?
+      
       #load template
       @sitetemplate = Template.find_by_tdefault(true)
       if @sitetemplate.nil?
@@ -23,6 +36,21 @@ class ApplicationController < ActionController::Base
       
       # load menu
       @sitemenu = Menu.arrange(:order => :ordernum)
+      
+      begin
+        @sitelayout = render_to_string :inline => @sitetemplate.template, :layout => false, :locals => {:page => @sitemenu}
+      rescue Exception => e
+        @sitelayout = render_to_string :inline => "template error + #{e.inspect}", :layout => false
+      end
+      
+      
+    else
+      
     end
+    
+    
+    
+	
+	
   end
 end

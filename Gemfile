@@ -23,3 +23,4 @@ gem 'rack-cache'
 gem 'friendly_id'
 gem 'brakeman', :require => false
 gem 'yui-compressor'
+gem 'erubis'

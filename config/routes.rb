@@ -4,6 +4,7 @@ Simondelacourt::Application.routes.draw do
   get 'as/css/:id' => 'templatemanager#css', :as => 'cssfile'
   get 'as/javascript/:id' => 'templatemanager#js', :as => 'jsfile'
   
+  get 'as/plugin_:id/:page.:format' => 'templatemanager#plugin', :as => 'side_pageplugin'
   resources :pages
   
   devise_for :users, { :sessions => "sessions" }
@@ -26,7 +27,7 @@ Simondelacourt::Application.routes.draw do
     resources :menus do
       get 'saveorder', :on => :collection
     end
-    
+    resources :page_plugins
     resources :settings do
       collection do
         resources :templates do

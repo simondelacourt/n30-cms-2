@@ -170,6 +170,7 @@ DEPENDENCIES
   brakeman
   coffee-rails (~> 3.2.1)
   devise
+  erubis
   formtastic
   friendly_id
   jquery-rails

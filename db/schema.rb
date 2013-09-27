@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130913101350) do
+ActiveRecord::Schema.define(:version => 20130927093823) do
 
   create_table "blog_categories", :force => true do |t|
     t.string   "title"
@@ -116,6 +116,15 @@ ActiveRecord::Schema.define(:version => 20130913101350) do
 
   add_index "menus", ["ancestry"], :name => "index_menus_on_ancestry"
 
+  create_table "page_plugins", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.text     "erb",        :limit => 2147483647
+    t.text     "css",        :limit => 2147483647
+    t.text     "js",         :limit => 2147483647
+  end
+
   create_table "pages", :force => true do |t|
     t.string   "title"
     t.text     "body"
@@ -124,6 +133,7 @@ ActiveRecord::Schema.define(:version => 20130913101350) do
     t.string   "ancestry"
     t.boolean  "sourcefromchildren"
     t.string   "slug"
+    t.integer  "page_plugin_id"
   end
 
   add_index "pages", ["ancestry"], :name => "index_pages_on_ancestry"

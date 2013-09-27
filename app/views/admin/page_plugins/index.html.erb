@@ -1,0 +1,22 @@
+<%= render :partial =>'admin/shared/settings_navbar' -%>
+<h2>Pagina plugins</h2>
+<table class="table table-hover table-striped">
+    <thead>
+      <tr>
+		  
+        <th>Titel</th>
+		<th></th>
+      </tr>
+    </thead>
+	<tbody>
+		<% @pageplugins.each do |s| %>
+		<tr>
+			<td><%= link_to s.title, edit_admin_page_plugin_url(s)  -%></td>
+			<td><div class="btn-group pull-right"><%= link_to 'Verwijder', admin_page_plugin_url(s), method: :delete, :action => 'destroy', :confirm => 'Weet u zeker dat u de stylesheet wilt verwijderen', :class => 'btn btn-default btn-sm' %></div></td>
+		</tr>
+		<% end %>
+</tbody>
+</table>
+<nav class="opmenu">
+<%= link_to raw('<i class="icon-plus"></i> Nieuwe plugin'), new_admin_page_plugin_url, :class => 'btn btn-default' -%>
+</nav>

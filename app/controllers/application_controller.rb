@@ -43,6 +43,10 @@ class ApplicationController < ActionController::Base
         @sitelayout = render_to_string :inline => "template error + #{e.inspect}", :layout => false
       end
       
+      #sideloader for JS + CSS
+      
+      @sideloaderJS = Array.new
+      @sideloaderCSS = Array.new
       
     else
       

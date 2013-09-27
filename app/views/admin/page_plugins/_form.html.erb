@@ -1,0 +1,67 @@
+<%= form_for [:admin, @pageplugin], remote: true, html: {role: "form", class: "form-horizontal"}  do |f| -%>
+<div class="form-group">
+	<%= f.label :title, :class => 'col-lg-1 control-label'%>
+	<div class="col-lg-11">
+		<%= f.text_field :title, :class => "form-control"%>
+	</div>
+</div>
+
+<ul class="nav nav-tabs" id="dMenu">
+	<li class="active"><a href="#html" data-toggle="tab">HTML/ERB</a></li>
+	<li><a href="#css" data-toggle="tab">CSS</a></li>
+	<li><a href="#js" data-toggle="tab">JavaScript</a></li>
+</ul>
+<div class="tab-content">
+	<div class="form-group form-pane">
+		<div class="col-lg-offset-1 col-lg-11">
+			<%= f.submit :class => "btn btn-default stylesubmit" %>
+		</div>
+	</div>
+	<div class="tab-pane  active" id="html">
+		<div class="form-group">
+			<%= f.label 'HTML/JS', :class => 'col-lg-1 control-label'%>
+			<div class="col-lg-11">
+				<%= f.text_area :erb, :rows => 80, :cols => 80, :class => "form-control"%>
+			</div>
+		</div>
+	</div>
+	<div class="tab-pane fade" id="css">
+		<div class="form-group">
+			<%= f.label :css, :class => 'col-lg-1 control-label'%>
+			<div class="col-lg-11">
+				<%= f.text_area :css, :rows => 80, :cols => 80, :class => "form-control"%>
+			</div>
+		</div>
+	</div>
+	<div class="tab-pane fade" id="js">
+
+		<div class="form-group">
+			<%= f.label :css, :class => 'col-lg-1 control-label'%>
+			<div class="col-lg-11">
+				<%= f.text_area :js, :rows => 80, :cols => 80, :class => "form-control"%>
+		
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+$(function () {
+	$('#dMenu a[href="#profile"]').tab('show')
+})
+var editor = CodeMirror.fromTextArea(document.getElementById("page_plugin_css"), {lineNumbers: true, mode: "text/css"});
+var editor = CodeMirror.fromTextArea(document.getElementById("page_plugin_js"), {lineNumbers: true, mode: "javascript"});
+  
+var mixedMode = {
+	name: "htmlmixed",
+	scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i,
+		mode: null},
+		{matches: /(text|application)\/(x-)?vb(a|script)/i,
+			mode: "vbscript"}]
+		};
+  
+  
+		var editor = CodeMirror.fromTextArea(document.getElementById("page_plugin_erb"), {lineNumbers: true, mode: "ruby"});
+  
+		</script>
+
+		<% end -%>

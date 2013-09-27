@@ -15,12 +15,21 @@
 	<%= stylesheet_link_tag    s.external_link, :media => "all" %>
 	<% end end -%>
 	
+	<% @sideloaderCSS.each do |css| %>
+	<%= stylesheet_link_tag   url_for(css), :media => "all" %>
+	<% end -%>
+	
 	<% @sitetemplate.javascripts.each do |j| %>
 	<% if j.external_link.empty?%>
 	<%= javascript_include_tag    url_for(j.getfileurl) %>
 	<% else %>
 	<%= javascript_include_tag    j.external_link %>
 	<% end end -%>
+	
+	<% @sideloaderJS.each do |js| %>
+	<%= javascript_include_tag   url_for(js) %>
+	<% end -%>
+	
 	
 	<link rel="alternate" type="application/atom+xml" title="Atom" href="<%= url_for feed_url(:format => 'atom') -%>" />
 	<%= csrf_meta_tags %>

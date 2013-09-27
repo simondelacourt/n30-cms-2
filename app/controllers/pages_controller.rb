@@ -11,10 +11,18 @@ class PagesController < ApplicationController
       @embeddables = Embeddable.where(page_id: params[:id])
     end
     
+    if !@page.page_plugin.nil?
+      unless @page.page_plugin.js.blank?
+        @sideloaderJS.push(side_pageplugin_url(:id => @page.page_plugin.id, :format => 'js', :page => @page.id))
+      end
+      unless @page.page_plugin.css.blank?
+        @sideloaderCSS.push(side_pageplugin_url(:id => @page.page_plugin.id, :format => 'css', :page => @page.id))
+      end
+    end
     begin
-      render :inline => @page.galleryplugin.erb, :layout => true, :locals => {:page => @page, :embeddables => @embeddables}
+      render :inline => @page.page_plugin.erb, :layout => true, :locals => {:page => @page, :embeddables => @embeddables}
     rescue ActionView::Template::Error => e
-      render :inline => "template error + #{e}", :layout => true
+      render :inline => "Template error + #{e}", :layout => true
       
     end
     

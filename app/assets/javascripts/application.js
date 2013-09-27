@@ -19,3 +19,7 @@
 //= require admin/codemirror
 //= require admin/modes/css
 //= require parser_rules/advanced.js
+//= require admin/tab.js
+//= require admin/modes/ruby.js
+//= require admin/modes/javascript.js
+//= require admin/modes/htmlembedded.js

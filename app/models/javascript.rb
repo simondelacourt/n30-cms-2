@@ -7,14 +7,14 @@ class Javascript < ActiveRecord::Base
     
     Dir.mkdir('app/assets/javascripts/int') unless File.exists?('app/assets/javascripts/int')
     
-    css_path = Rails.root.join('app/assets/javascripts/int',"#{self.id}_#{self.title.parameterize}.js")
+    css_path = Rails.root.join('public/as/javascripts',"#{self.id}_#{self.title.parameterize}.js")
     File.open(css_path,"w+") do |f|
       f.write(compressor.compress(self.script))
     end
   end
   
   def getfileurl
-    return "int/#{self.id}_#{self.title.parameterize}.js"
+    return "as/javascripts/#{self.id}_#{self.title.parameterize}.js"
   end
   
   

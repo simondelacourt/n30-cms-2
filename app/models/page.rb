@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-  attr_accessible :body, :parent_id, :title, :sourcefromchildren
+  attr_accessible :body, :parent_id, :title, :sourcefromchildren, :page_plugin_id
   has_many :embeddables, dependent: :destroy
   belongs_to :page_plugin
   

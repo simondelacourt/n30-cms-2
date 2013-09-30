@@ -6,16 +6,18 @@ class Stylesheet < ActiveRecord::Base
   def savetofile
     compressor = YUI::CssCompressor.new
     
-    Dir.mkdir('app/assets/stylesheets/int') unless File.exists?('app/assets/stylesheets/int')
+    Dir.mkdir(Rails.root.join('public/as')) unless File.exists?(Rails.root.join('public/as'))
     
-    css_path = Rails.root.join('app/assets/stylesheets/int',"#{self.id}_#{self.title.parameterize}.css")
+    Dir.mkdir(Rails.root.join('public/as/stylesheets')) unless File.exists?(Rails.root.join('public/as/stylesheets'))
+    
+    css_path = Rails.root.join('public/as/stylesheets',"#{self.id}_#{self.title.parameterize}.css")
     File.open(css_path,"w+") do |f|
       f.write(compressor.compress(self.css))
     end
   end
   
   def getfileurl
-    return "int/#{self.id}_#{self.title.parameterize}.css"
+    return "as/stylesheets/#{self.id}_#{self.title.parameterize}.css"
   end
   
   extend FriendlyId

@@ -4,12 +4,17 @@ class Admin::JavascriptsController < ApplicationController
   
   def index
     @javascripts = Javascript.find(:all)
+    @pagetitle = 'Javascripts'
+    
   end
   def new
     @javascript = Javascript.new
+    @pagetitle = 'Nieuw script'
+    
   end
   def edit
     @javascript = Javascript.find(params[:id])
+    @pagetitle = "Wijzig #{@javascript.title}"
   end
   def create
     @javascript = Javascript.new(params[:javascript])

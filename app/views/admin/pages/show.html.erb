@@ -1,75 +1,92 @@
-<h2><%= @page.title -%></h2>
 <div class="row">
-	<div class="col-md-10">
-		<div class="panel panel-default">
-			<div class="panel-heading"><h3 class="panel-title">Pagina instellingen</h3></div>
-			<div class="panel-body">
-				<%= form_for [:admin,@page] do |f| -%>
-				
-			    <div class="checkbox">
-			      <label>
-  					<%= f.check_box :sourcefromchildren -%> Gebruik embeddables van gelinkte pagina's
-			      </label>
-			    </div>
-				
-				
-				<div class="form-group pull-right">
-						<%= f.submit :class => "btn btn-default" %>
-				</div>
-				<% end -%>
-			</div>
-		</div>
-		<div>
-			<%= debug @page.ancestors -%>
-		</div>
-		<div class="panel panel-default"> 
-			<div class="panel-heading"><h3 class="panel-title">Pagina's gelinkt aan deze pagina</h3></div>
-			
-			<table class="table table-hover table-striped">
-				<thead>
-					<tr>
-						<th>Pagina</th>
-					</tr>
-				</thead>	
-				<tbody>
-			
-			<% @page.children.map do |c| -%>
-			<tr>
-				<td><%= link_to c.title, admin_page_url(c) -%></td>
-			</tr>	
-			<% end -%>
-				</tbody>
-			</table>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading"><h3 class="panel-title"><%= link_to 'Pagina tekst', edit_admin_page_url(@page) -%></h3></div>
-			<div class="panel-body">
-				<%= raw(@page.body) %>
-			</div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading"><h3 class="panel-title">Ingesloten Objecten</h3></div>
-			<div class="panel-body">
-				<% if @embeddables.length > 0 %>
-				<div class="row">
-					<% @embeddables.each do |e| %>
-					<% if e.linkmode == 'link'%>
-					<div class="col-md-2"><%= link_to(image_tag(embedify(e.htmlbody, 180)['thumbnail_url'], :class => 'img-thumbnail img-responsive'), edit_admin_page_embeddable_url(:id => e.id, :page_id => params[:id])) -%></div>
-					<% else %>
-					<div class="col-md-2"><%= link_to(image_tag(e.image(:thumb), :class => 'img-thumbnail img-responsive'),  edit_admin_page_embeddable_url(:id => e.id, :page_id => params[:id]))   -%></div>
-					<% end %>
-					<% end -%>
-				</div>
-				<% end -%>
-			</div>
+	<div class="col-md-2">
+		<h2><%= @page.title -%></h2>
+		<div class="btn-group-vertical">
+			<%= link_to 'Wijzig pagina', edit_admin_page_url(@page), :class => 'btn btn-default btn-sm' -%>
+			<%= link_to 'Verwijder pagina', admin_page_url(@page), :confirm => "Weet u zeker dat u deze pagina wilt verwijderen?", :method => :delete, :action => "destroy", :class => 'btn btn-default btn-sm' -%>
+			<%= link_to 'Voeg afbeelding toe', new_admin_page_embeddable_url(@page, :mode => 'image'), :class => 'btn btn-default btn-sm' -%>
+			<%= link_to 'Embed link', new_admin_page_embeddable_url(@page, :mode => 'link'), :class => 'btn btn-default btn-sm' -%>
 		</div>
 	</div>
-	<aside class="col-md-2">
-		<div class="btn-group-vertical">
-			<%= link_to 'Wijzig pagina', edit_admin_page_url(@page), :class => 'btn btn-default' -%>
-			<%= link_to 'Verwijder pagina', admin_page_url(@page), :confirm => "Weet u zeker dat u deze pagina wilt verwijderen?", :method => :delete, :action => "destroy", :class => 'btn btn-default' -%>
-			<%= link_to 'Voeg afbeelding toe', new_admin_page_embeddable_url(@page, :mode => 'image'), :class => 'btn btn-default' -%>
-			<%= link_to 'Embed link', new_admin_page_embeddable_url(@page, :mode => 'link'), :class => 'btn btn-default' -%>
+	<div class="col-md-10">
+		<ol class="breadcrumb">
+		  <li><%= link_to 'Pagina\'s', admin_pages_url -%></li>
+		  <% if @page.ancestors.count > 0 -%>
+		  <% @page.ancestors.each do |a| -%>
+		  <li><%= link_to a.title, admin_page_url(a) -%></li>
+		  <% end -%><% end -%>
+		  <li class="active"><%= @page.title -%></li>
+		</ol>
+		
+		<div class="settings-pane-intro">
+			<h3 class="panel-title">Pagina instellingen</h3>
+			<p>Plugins bepalen de manier waarop een pagina er uit ziet en de 'embeddables' te zien zijn.</p>
 		</div>
+		<%= form_for [:admin,@page], :html => {class: "form-horizontal settings-pane"} do |f| -%>
+		<div class="form-group">
+			<%= f.label 'Plugin', :class => 'col-lg-1 control-label'%>
+			<div class="col-lg-11">
+				<%= f.select :page_plugin_id, PagePlugin.find(:all).collect {|p| [ p.title, p.id ] },{}, {:class => "form-control"}%>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-lg-offset-1 col-lg-11">
+				<div class="checkbox">
+					<label>
+						<%= f.check_box :sourcefromchildren -%> Gebruik embeddables van gelinkte pagina's
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-lg-offset-1 col-lg-11">
+				<%= f.submit :class => "btn btn-default" %>
+			</div>
+		</div>
+		<% end -%>
+		<div>
+		<%= debug @page.ancestors -%>
+	</div>
+	<div class="panel panel-default"> 
+		<div class="panel-heading"><h3 class="panel-title">Pagina's gelinkt aan deze pagina</h3></div>
+			
+		<table class="table table-hover table-striped">
+			<thead>
+				<tr>
+					<th>Pagina</th>
+				</tr>
+			</thead>	
+			<tbody>
+			
+				<% @page.children.map do |c| -%>
+				<tr>
+					<td><%= link_to c.title, admin_page_url(c) -%></td>
+				</tr>	
+				<% end -%>
+			</tbody>
+		</table>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading"><h3 class="panel-title"><%= link_to 'Pagina tekst', edit_admin_page_url(@page) -%></h3></div>
+		<div class="panel-body">
+			<%= raw(@page.body) %>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading"><h3 class="panel-title">Ingesloten Objecten</h3></div>
+		<div class="panel-body">
+			<% if @embeddables.length > 0 %>
+			<div class="row">
+				<% @embeddables.each do |e| %>
+				<% if e.linkmode == 'link'%>
+				<div class="col-md-2"><%= link_to(image_tag(embedify(e.htmlbody, 180)['thumbnail_url'], :class => 'img-thumbnail img-responsive'), edit_admin_page_embeddable_url(:id => e.id, :page_id => params[:id])) -%></div>
+				<% else %>
+				<div class="col-md-2"><%= link_to(image_tag(e.image(:thumb), :class => 'img-thumbnail img-responsive'),  edit_admin_page_embeddable_url(:id => e.id, :page_id => params[:id]))   -%></div>
+				<% end %>
+				<% end -%>
+			</div>
+			<% end -%>
+		</div>
+		
 	</div>
 </div>

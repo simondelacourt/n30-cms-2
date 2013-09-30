@@ -4,12 +4,16 @@ class Admin::StylesheetsController < ApplicationController
   
   def index
     @stylesheets = Stylesheet.find(:all)
+    @pagetitle = 'CSS Stylesheets'
   end
   def new
     @stylesheet = Stylesheet.new
+    @pagetitle = 'Nieuwe CSS Stylesheets'
+    
   end
   def edit
     @stylesheet = Stylesheet.find(params[:id])
+    @pagetitle = "Wijzig #{@stylesheet.title}"
   end
   def create
     @stylesheet = Stylesheet.new(params[:stylesheet])

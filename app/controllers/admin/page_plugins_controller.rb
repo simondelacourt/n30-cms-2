@@ -4,12 +4,17 @@ class Admin::PagePluginsController < ApplicationController
   
   def index
     @pageplugins = PagePlugin.find(:all)
+    @pagetitle = 'Pagina plugins'
+    
   end
   def new
     @pageplugin = PagePlugin.new
+    @pagetitle = 'Nieuwe plugin'
+    
   end
   def edit
     @pageplugin = PagePlugin.find(params[:id])
+    @pagetitle = "Wijzig #{@pageplugin.title}"
   end
   def create
     @pageplugin = PagePlugin.new(params[:page_plugin])

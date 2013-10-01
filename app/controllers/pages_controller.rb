@@ -23,7 +23,6 @@ class PagesController < ApplicationController
       render :inline => @page.page_plugin.erb, :layout => true, :locals => {:page => @page, :embeddables => @embeddables}
     rescue ActionView::Template::Error => e
       render :inline => "Template error + #{e}", :layout => true
-      
     end
     
   end

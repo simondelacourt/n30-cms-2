@@ -5,7 +5,10 @@ class Javascript < ActiveRecord::Base
   def savetofile
     compressor = YUI::JavaScriptCompressor.new
     
-    Dir.mkdir('app/assets/javascripts/int') unless File.exists?('app/assets/javascripts/int')
+    Dir.mkdir(Rails.root.join('public/as')) unless File.exists?(Rails.root.join('public/as'))
+    
+    Dir.mkdir(Rails.root.join('public/as/javascripts')) unless File.exists?(Rails.root.join('public/as/javascripts'))
+      
     
     css_path = Rails.root.join('public/as/javascripts',"#{self.id}_#{self.title.parameterize}.js")
     File.open(css_path,"w+") do |f|

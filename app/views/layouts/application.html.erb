@@ -21,7 +21,7 @@
 	
 	<% @sitetemplate.javascripts.each do |j| %>
 	<% if j.external_link.empty?%>
-	<%= javascript_include_tag    url_for(j.getfileurl) %>
+	<%= javascript_include_tag    root_url + j.getfileurl %>
 	<% else %>
 	<%= javascript_include_tag    j.external_link %>
 	<% end end -%>

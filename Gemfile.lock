@@ -84,8 +84,11 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.24)
+    mini_portile (0.5.0)
     multi_json (1.7.9)
     mysql2 (0.3.11)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
     ohembedr (0.1.5)
     orm_adapter (0.4.0)
     paperclip (3.4.2)
@@ -159,6 +162,9 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.1)
       rack (>= 1.0)
+    will_paginate (3.0.4)
+    will_paginate-bootstrap (0.2.5)
+      will_paginate (>= 3.0.3)
     yui-compressor (0.11.0)
 
 PLATFORMS
@@ -170,11 +176,11 @@ DEPENDENCIES
   brakeman
   coffee-rails (~> 3.2.1)
   devise
-  erubis
   formtastic
   friendly_id
   jquery-rails
   mysql2
+  nokogiri
   ohembedr
   paperclip
   rack-cache
@@ -184,4 +190,6 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   therubyracer
   uglifier (>= 1.0.3)
+  will_paginate
+  will_paginate-bootstrap
   yui-compressor

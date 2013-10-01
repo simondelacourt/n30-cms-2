@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130927093823) do
+ActiveRecord::Schema.define(:version => 20131001083525) do
 
   create_table "blog_categories", :force => true do |t|
     t.string   "title"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(:version => 20130927093823) do
     t.datetime "leaderimage_updated_at"
     t.integer  "blog_group_id"
     t.integer  "blog_category_id"
+    t.string   "status"
+    t.string   "original_id"
   end
 
   create_table "blog_tag_couples", :force => true do |t|
@@ -63,6 +65,17 @@ ActiveRecord::Schema.define(:version => 20130927093823) do
     t.string   "title"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "blog_templates", :force => true do |t|
+    t.string   "title"
+    t.text     "blog_index",    :limit => 2147483647
+    t.text     "blog_read",     :limit => 2147483647
+    t.text     "blog_search",   :limit => 2147483647
+    t.text     "blog_category", :limit => 2147483647
+    t.boolean  "mode",                                :default => false
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
   end
 
   create_table "embeddables", :force => true do |t|

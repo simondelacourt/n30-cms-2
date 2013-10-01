@@ -4,7 +4,7 @@ class Admin::BlogPostsController < ApplicationController
   autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag' # <- New
   
   def index
-    @blogposts = BlogPost.order("created_at DESC")
+    @blogposts = BlogPost.paginate(:page => params[:page]).order("created_at DESC")
     @pagetitle = 'Blogberichten'
   end
   def show

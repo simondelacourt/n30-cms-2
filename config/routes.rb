@@ -20,6 +20,7 @@ Simondelacourt::Application.routes.draw do
     resources :blog_groups do
       resources :blog_categories
     end
+    resources :blog_templates
     resources :pages do
       resources :embeddables
     end
@@ -28,6 +29,9 @@ Simondelacourt::Application.routes.draw do
       get 'saveorder', :on => :collection
     end
     resources :page_plugins
+    resources :extras do
+      post 'importtumblr', :on => :collection
+    end
     resources :settings do
       collection do
         resources :templates do

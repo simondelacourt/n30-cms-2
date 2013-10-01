@@ -3,11 +3,17 @@
   	<ul class="nav navbar-nav navbar-right">
 		<li><%= link_to raw('<i class="icon-cogs"></i> Instellingen'), admin_settings_url%></li>
 		<li><%= link_to raw('<i class="icon-picture"></i> Thumbnails'), admin_thumb_styles_url%></li>
-		<li><%= link_to raw('<i class="icon-html5"></i> Templates'), admin_templates_url%></li>
-		<li><%= link_to raw('<i class="icon-css3"></i> CSS Stylesheets'), admin_stylesheets_url%></li>
-		<li><%= link_to raw('<i class="icon-code"></i> JavaScripts'), admin_javascripts_url%></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-html5"></i> Templates <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+	  		<li><%= link_to raw('<i class="icon-html5"></i> Templates'), admin_templates_url%></li>
+			<li><%= link_to raw('<i class="icon-css3"></i> CSS Stylesheets'), admin_stylesheets_url%></li>
+			<li><%= link_to raw('<i class="icon-code"></i> JavaScripts'), admin_javascripts_url%></li>
+          </ul>
+        </li>
 		<li><%= link_to raw('<i class="icon-puzzle-piece"></i> Plugins'), admin_page_plugins_url%></li>
-		
+		<li><%= link_to raw('<i class="icon-puzzle-piece"></i> Extras'), admin_extras_url%></li>
+		<li><%= link_to raw('<i class="icon-lemon"></i> Blog templates'), admin_blog_templates_url -%></li>
 		
 	</ul>
 </nav>

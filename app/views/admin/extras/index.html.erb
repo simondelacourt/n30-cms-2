@@ -1,0 +1,6 @@
+<%= render :partial =>'admin/shared/settings_navbar' -%>
+<h2>Importeer Tumblr</h2>
+<%= form_for :extras, :url => { :action => 'importtumblr'} do |f| %>
+<%= f.text_field :url -%>
+<%= f.submit -%>
+<% end -%>

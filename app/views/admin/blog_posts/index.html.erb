@@ -1,4 +1,6 @@
 <%= render :partial =>'admin/shared/blog_navbar' -%>
+<%= will_paginate @blogposts, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
+
 <% @blogposts.each do |bp| -%>
 <div class="row blogset" >
 	<article class="col-md-2">
@@ -11,3 +13,4 @@
 	<%= render partial: bp, locals: {barclass: 'col-md-10 blog-message', rendermode: 'intro'} -%>
 </div>
 	<%- end %>
+	<%= will_paginate @blogposts, renderer: BootstrapPagination::Rails %>

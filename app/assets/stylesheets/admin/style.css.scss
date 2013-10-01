@@ -5,28 +5,32 @@ body {
 }
 .navbar-admin {
 	-webkit-box-shadow: none;
-	box-shadow: none;
+	font-family: 'Roboto Slab';
+	font-weight: 200;
+	box-shadow: none; 
 	border: 0px;
 	background-image: none;
-	background-color: #48B4EB;
+	background-color: #235B79;
 	color: white;
 	min-height: 10px;
 	opacity: 0.6;
 	transition: opacity .25s linear;
 	z-index: 100;
+	margin: 0px;
 }
 .navbar-admin .container {
 	position: relative;
+	padding-left: 35px;
 }
 .navbar-admin .navbar-nav {
 	position: absolute;
-	right: 0px;
+	right: 20px;
 }
 .navbar-admin:hover {
 	opacity: 0.8;
 }
 .navbar-admin .navbar-brand {
-	padding: 20px 20px 20px 20px;
+	padding: 12px 12px 12px 12px;
 }
 .navbar-admin .navbar-brand:link, .navbar-admin .navbar-brand:visited  {
 	color: white;
@@ -34,7 +38,7 @@ body {
 }
 .navbar-admin .navbar-nav > li > a {
 	color: white;
-	padding: 20px;
+	padding: 12px;
 	text-shadow: none;
 	transition: color .25s linear;
 	
@@ -54,6 +58,21 @@ body {
 	background: white;
 	color: black;
 }
+.navbar-blog {
+	background-color: #EEEFD0 !important;
+	background-image: none;
+	border: 0;
+	border-radius: 0;
+	margin: 0px 0px 30px 0px;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.admincontent {
+	margin: 0px auto 0px auto;
+}
+
+
 /* controls */
 .btn-default {
 	background-image: none;
@@ -66,7 +85,8 @@ body {
 
 /* footer */
 .bs-footer {
-	position: absolute;
+	position: relative;
+	margin-top: 100px;
 	bottom: 10px;
 	width: 100%;
 	padding-top: 20px;
@@ -102,9 +122,6 @@ body {
 
 
 /* content */
-.admincontent {
-	margin-top: 30px;
-}
 #pagestructure {
 	list-style: none;
 	padding: 0px;
@@ -119,17 +136,6 @@ body {
 }
 #pagestructure li:last-child {
 	border: none;
-}
-.container {
-}
-.navbar-blog {
-	background-color: #EEEFD0 !important;
-	background-image: none;
-	border: 0;
-	margin-top: -20px;
-	border-radius: 0;
-	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 .blog-message {
@@ -276,18 +282,16 @@ body {
 	margin-top: 20px;
 }
 .settings-pane-intro {
-	border-radius: 4px 4px 0px 0px;
 	border: 0px ;
 	border-bottom: 0;
-	padding: 20px;
+	padding: 15px 15px 1px 15px;
 	margin: 0px;
-	background: #f5f5f5;
-	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+	border-bottom: 3px solid #3C6894;
 	
 }
 .settings-pane-intro h3 {
 	font-size: 1.7em;
+	font-family: 'Roboto Slab';
 }
 .settings-pane {
 	display: block;
@@ -295,12 +299,27 @@ body {
 	margin-left: 0;
 	margin-right: 0;
 	background-color: #fff;
-	border: 1px solid #f5f5f5;
-	border-radius: 0px 0px 4px 4px;
+	border: 1px solid #EFEFEF;
 	box-shadow: none;
+	margin-bottom: 30px;
+	background: #FFF;
+	padding: 0px;
+}
+form.settings-pane {
 	padding: 20px;
-	margin-bottom: 10px;
-	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-	
+}
+.settings-pane table {
+	width: 100%;
+	margin: 0px;
+}
+.settings-pane-text {
+	padding: 20px;
+}
+.breadcrumb {
+	background: #E8F3FC;
+	border-radius: 0;
+	opacity: 0.6;
+}
+.breadcrumb:hover {
+	opacity: 0.8;
 }

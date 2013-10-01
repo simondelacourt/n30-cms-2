@@ -11,7 +11,7 @@ class BlogPost < ActiveRecord::Base
   validates :user_id, presence: true
   validates :blog_category_id, presence: true
   validates :body, presence: true
-  validates :intro, presence: true
+  validates :original_id, uniqueness: true
   
   has_attached_file :leaderimage, :styles => {:large => '1000x1000>', :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
   

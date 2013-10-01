@@ -1,0 +1,24 @@
+<%= render :partial =>'admin/shared/settings_navbar' -%>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Blog template</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+	
+	<tbody>
+		<% @blogtemplates.each do |t| %>
+		<tr>
+		<td><%= link_to t.title, edit_admin_blog_template_url(t) -%></td>
+		<td>
+		</td>
+		</tr>
+		
+		<% end -%>
+</tbody>
+</table>
+<nav class="opmenu">
+<%= link_to raw('<i class="icon-plus"></i> Nieuw template'), new_admin_blog_template_url, :class => 'btn btn-default' -%>
+</nav>
+

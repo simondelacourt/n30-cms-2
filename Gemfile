@@ -23,4 +23,6 @@ gem 'rack-cache'
 gem 'friendly_id'
 gem 'brakeman', :require => false
 gem 'yui-compressor'
-gem 'erubis'
+gem 'nokogiri'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'

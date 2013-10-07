@@ -17,6 +17,12 @@ class BlogPost < ActiveRecord::Base
   
   acts_as_taggable
   
+  
+  searchable do
+    text :title, :body
+  end
+  
+  
   def to_param
     "#{id}-#{title.parameterize}"
   end

@@ -15,6 +15,12 @@
 		</div>
 		<%= form_for [:admin,@page], :html => {class: "form-horizontal settings-pane"} do |f| -%>
 		<div class="form-group">
+			<%= f.label 'Slug', :class => 'col-lg-1 control-label'%>
+			<div class="col-lg-11">
+				<p class="form-control-static"><%= @page.slug -%> (<%= link_to 'stel in als homepagina', setashome_admin_settings_url(:page => @page)%>)</p>
+			</div>
+		</div>
+		<div class="form-group">
 			<%= f.label 'Plugin', :class => 'col-lg-1 control-label'%>
 			<div class="col-lg-11">
 				<%= f.select :page_plugin_id, PagePlugin.find(:all).collect {|p| [ p.title, p.id ] },{}, {:class => "form-control"}%>

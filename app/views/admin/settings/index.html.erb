@@ -14,7 +14,12 @@
 		<td>
 		</td>
 		</tr>
-		
 		<% end -%>
 </tbody>
 </table>
+
+<nav class="opmenu btn-group">
+<%= link_to raw('<i class="icon-plus"></i> Nieuwe instelling'), new_admin_setting_url, :class => 'btn btn-default' -%><%= link_to raw('<i class="icon-plus"></i> Herstel standaard instellingen'), resetsettings_admin_settings_url, :class => 'btn btn-default' -%>
+
+</nav>
+

@@ -21,20 +21,53 @@ class HomeController < ApplicationController
       begin
         render :inline => @blogtemplate.blog_index, :layout => true, :locals => {:blogposts => @blogposts, :bloggroups => @bloggroups}
       rescue ActionView::Template::Error => e
-        render :inline => "Template error + #{e}", :layout => true
+        render :inline => "Template error: #{e}", :layout => true
       end
     else
-      @page = Page.find(page)
+      begin
+        @page = Page.find(page)
+      rescue ActiveRecord::RecordNotFound
+         return render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
+      end
       @pagetitle = @page.title
-      @ids = [params[:id].to_i]
+      @ids = [@page.id]
+      #embeddables
       if @page.sourcefromchildren
         @page.descendants.each do |d|
           @ids.push d.id
         end
-        @embeddables = Embeddable.where(page_id: @ids)
+        embeddables = Embeddable.where(page_id: @ids)
       else
-        @embeddables = Embeddable.where(page_id: params[:id])
+        embeddables = Embeddable.where(page_id: @page.id)
       end
+      @embeddables = Array.new
+      embedarray = Array.new
+      if @page.showamountembed > 0
+        embeddables.each do |e|
+          if embedarray[e.page_id].nil?
+            embedarray[e.page_id] = Array.new
+          end
+          embedarray[e.page_id].push e
+        end
+        embedarray.each do |e|
+          unless e.nil?
+            if e.length < @page.showamountembed
+              e.each do |i|
+                @embeddables.push i
+              end
+            else
+              i = 0
+              while i < @page.showamountembed
+                @embeddables.push e[i]
+                i += 1
+              end
+            end
+          end
+        end
+      else
+        @embeddables = embeddables
+      end
+
     
       if !@page.page_plugin.nil?
         unless @page.page_plugin.js.blank?
@@ -47,7 +80,7 @@ class HomeController < ApplicationController
       begin
         render :inline => @page.page_plugin.erb, :layout => true, :locals => {:page => @page, :embeddables => @embeddables}
       rescue ActionView::Template::Error => e
-        render :inline => "Template error + #{e}", :layout => true
+        render :inline => "Template error: #{e}", :layout => true
       end
       
     end

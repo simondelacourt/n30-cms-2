@@ -1,6 +1,12 @@
 class PagesController < ApplicationController
   def show
-    @page = Page.find(params[:id])
+    begin
+      @page = Page.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+       return render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
+    end
+    
+    
     @ids = [@page.id]
     @pagetitle = @page.title
     
@@ -11,7 +17,7 @@ class PagesController < ApplicationController
       end
       embeddables = Embeddable.where(page_id: @ids)
     else
-      embeddables = Embeddable.where(page_id: params[:id])
+      embeddables = Embeddable.where(page_id: @page.id)
     end
     @embeddables = Array.new
     embedarray = Array.new
@@ -40,6 +46,8 @@ class PagesController < ApplicationController
     else
       @embeddables = embeddables
     end
+    
+    # page plugin, loading layout
     
     if !@page.page_plugin.nil?
       unless @page.page_plugin.js.blank?

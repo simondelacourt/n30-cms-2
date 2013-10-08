@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
       begin
         @sitelayout = render_to_string :inline => @sitetemplate.template, :layout => false, :locals => {:page => @sitemenu}
       rescue Exception => e
-        @sitelayout = render_to_string :inline => "template error + #{e.inspect}", :layout => false
+        @sitelayout = render_to_string :inline => "template error: #{e}", :layout => false
       end
       
       #sideloader for JS + CSS

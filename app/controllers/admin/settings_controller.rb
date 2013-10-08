@@ -36,6 +36,8 @@ class Admin::SettingsController < ApplicationController
     
     def1 = Setting.new({:title => 'home', :settings => 'blog'})
     def1.save
+    def2 = Setting.new({:title => 'title', :settings => 'site'})
+    def2.save
     redirect_to admin_settings_url
     
   end

@@ -48,6 +48,17 @@ class ApplicationController < ActionController::Base
       @sideloaderJS = Array.new
       @sideloaderCSS = Array.new
       
+      # load settings
+      
+      @appsettings = Hash.new
+      Setting.find(:all).each do |s|
+        @appsettings[s.title] = s.settings
+      end
+      
+      unless @appsettings[:title].nil?
+        @title = @appsettings[:title]
+      end
+      
     else
       
     end

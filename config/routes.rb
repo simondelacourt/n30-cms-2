@@ -1,5 +1,5 @@
 Simondelacourt::Application.routes.draw do
-  root :to => 'blog#index'
+  root :to => 'home#index'
   get 'feed' => 'home#feed', :as => 'feed'
   get 'as/css/:id' => 'templatemanager#css', :as => 'cssfile'
   get 'as/javascript/:id' => 'templatemanager#js', :as => 'jsfile'

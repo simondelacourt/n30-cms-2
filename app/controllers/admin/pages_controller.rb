@@ -7,7 +7,7 @@ class Admin::PagesController < ApplicationController
   end
   def show
     @page = Page.find(params[:id])
-    @ids = [params[:id].to_i]
+    @ids = [@page.id]
     if @page.sourcefromchildren
       @page.descendants.each do |d|
         @ids.push d.id
@@ -16,6 +16,7 @@ class Admin::PagesController < ApplicationController
     else
       @embeddables = Embeddable.where(page_id: params[:id])
     end
+    
   end
   def new
     @page = Page.new

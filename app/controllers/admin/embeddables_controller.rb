@@ -7,9 +7,14 @@ class Admin::EmbeddablesController < ApplicationController
     @mode = params[:mode]
   end
   def create
+    
+    @page = Page.find(params[:page_id])
+    
+    
+    
     if params[:embeddable][:linkmode] == 'link'
       @embeddable = Embeddable.new(params[:embeddable])
-      @embeddable.page_id = params[:page_id]
+      @embeddable.page_id = @page.id
       if @embeddable.save
         redirect_to admin_page_url(params[:page_id])
       else
@@ -17,15 +22,12 @@ class Admin::EmbeddablesController < ApplicationController
       end
     else
       @embeddable = Embeddable.new(params[:embeddable])
-      @embeddable.page_id = params[:page_id]
-      respond_to do |format|
+      @embeddable.page_id = @page.id        
         if @embeddable.save
-          format.js
+          redirect_to admin_page_url(params[:page_id])
         else
-          @error = true
-          format.js
+          redirect_to action: :new
         end
-      end
     end
   end
   def edit

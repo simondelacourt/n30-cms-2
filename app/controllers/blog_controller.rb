@@ -52,7 +52,7 @@ class BlogController < ApplicationController
     
     @blogposts = BlogPost.search do
       fulltext params[:query]
-      paginate :page => page_num, :per_page => 50
+      paginate :page => page_num, :per_page => 10
     end
     
     

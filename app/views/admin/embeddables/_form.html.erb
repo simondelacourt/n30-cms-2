@@ -1,6 +1,6 @@
 <% if params[:mode] == 'link' %>
 <h2>Voeg nieuwe embed code toe</h2>
-<%= form_for [:admin, :page, @embeddable],:html => {:role => 'form',  class: "form-horizontal"} do |f| -%>
+<%= form_for [:admin, :page, @embeddable],remote: false,:html => {:role => 'form',  class: "form-horizontal"} do |f| -%>
 <% if @embeddable.errors.any? %>
 <div id="errorExplanation" class="well">
   <h4><%= pluralize(@embeddable.errors.count, "error") %> prohibited this record from being saved:</h4>

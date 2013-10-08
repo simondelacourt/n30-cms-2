@@ -14,7 +14,7 @@ class Admin::PagesController < ApplicationController
       end
       @embeddables = Embeddable.where(page_id: @ids)
     else
-      @embeddables = Embeddable.where(page_id: params[:id])
+      @embeddables = Embeddable.where(page_id: @page.id)
     end
     
   end

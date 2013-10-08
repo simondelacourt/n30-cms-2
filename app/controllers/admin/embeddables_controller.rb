@@ -50,4 +50,11 @@ class Admin::EmbeddablesController < ApplicationController
     end
         
   end
+  def destroy
+    @embeddable = Embeddable.find(params[:id])
+    pageid = @embeddable.page_id
+    @embeddable.destroy
+    redirect_to admin_page_url(pageid)
+    
+  end
 end

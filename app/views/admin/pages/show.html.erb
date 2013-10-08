@@ -36,6 +36,12 @@
 			</div>
 		</div>
 		<div class="form-group">
+			<%= f.label 'Aantal embeds per paigina', :class => 'col-lg-1 control-label'%>
+			<div class="col-lg-11">
+				<%= f.text_field :showamountembed, :class => "form-control"%>
+			</div>
+		</div>
+		<div class="form-group">
 			<div class="col-lg-offset-1 col-lg-11">
 				<%= f.submit :class => "btn btn-default" %>
 			</div>
@@ -75,15 +81,29 @@
 		</div>
 		<div class="settings-pane settings-pane-text">
 			<% if @embeddables.length > 0 %>
-			<div class="row">
-				<% @embeddables.each do |e| %>
-				<% if e.linkmode == 'link'%>
-				<div class="col-md-2"><%= link_to(image_tag(embedify(e.htmlbody, 180)['thumbnail_url'], :class => 'img-thumbnail img-responsive'), edit_admin_page_embeddable_url(:id => e.id, :page_id => params[:id])) -%></div>
-				<% else %>
-				<div class="col-md-2"><%= link_to(image_tag(e.image(:thumb), :class => 'img-thumbnail img-responsive'),  edit_admin_page_embeddable_url(:id => e.id, :page_id => params[:id]))   -%></div>
-				<% end %>
-				<% end -%>
-			</div>
+			<table class="table table-striped">
+				<tbody>
+					<% @embeddables.each do |e| %>
+					<tr>
+					<% if e.linkmode == 'link'%>
+					<td><%= link_to(image_tag(embedify(e.htmlbody, 180)['thumbnail_url'], :class => 'img-thumbnail img-responsive'), edit_admin_page_embeddable_url(:id => e.id, :page_id => params[:id])) -%></td>
+					<% else %>
+					<td><%= link_to(image_tag(e.image(:thumb), :class => 'img-thumbnail img-responsive'),  edit_admin_page_embeddable_url(:id => e.id, :page_id => params[:id]))   -%></td>
+					<% end %>
+					<td>
+						<%= e.title -%>
+					</td>
+					<td><div class="btn-group pull-right">
+						<%= link_to raw('<i class="icon-remove"></i> Verwijder'), admin_page_embeddable_url(:id => e.id, :page_id => params[:id]), :confirm => "Weet u zeker dat u deze embeddable wilt verwijderen?", :method => :delete, :action => "destroy", :class => 'btn btn-default btn-xs' -%>
+						<%= link_to raw('<i class="icon-edit"></i> Wijzig'), edit_admin_page_embeddable_url(:id => e.id, :page_id => params[:id]), :class => 'btn btn-default btn-xs' -%>
+						</div>
+					</td>
+				</tr>
+					<% end -%>
+			
+			
+			
+			</table>
 			<% end -%>
 		</div>
 		<ol class="breadcrumb">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131001083525) do
+ActiveRecord::Schema.define(:version => 20131007151009) do
 
   create_table "blog_categories", :force => true do |t|
     t.string   "title"
@@ -141,12 +141,13 @@ ActiveRecord::Schema.define(:version => 20131001083525) do
   create_table "pages", :force => true do |t|
     t.string   "title"
     t.text     "body"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "ancestry"
     t.boolean  "sourcefromchildren"
     t.string   "slug"
     t.integer  "page_plugin_id"
+    t.integer  "showamountembed",    :default => 0
   end
 
   add_index "pages", ["ancestry"], :name => "index_pages_on_ancestry"

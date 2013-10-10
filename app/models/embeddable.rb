@@ -13,12 +13,7 @@ class Embeddable < ActiveRecord::Base
       sizes[:"#{size.title}"] = [size.sizes]
     end
     sizes
-  end
-  def image_tag (test)
-    return test
-    
-  end
-  
+  end  
 
   
 end

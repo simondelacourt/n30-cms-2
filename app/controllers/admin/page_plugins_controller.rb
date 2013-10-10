@@ -38,6 +38,13 @@ class Admin::PagePluginsController < ApplicationController
       render action: 'edit'
     end
   end
+  def export
+    @pageplugin = PagePlugin.find(params[:page_plugin_id])
+    @exportable = {:erb => @pageplugin.erb, :css => @pageplugin.css, :js => @pageplugin.js}
+  end
+  def import
+    
+  end
   def destroy
     @pageplugin = PagePlugin.find(params[:id])
     @pageplugin.destroy

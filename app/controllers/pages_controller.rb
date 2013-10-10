@@ -47,6 +47,7 @@ class PagesController < ApplicationController
       @embeddables = embeddables
     end
     
+    
     # page plugin, loading layout
     
     if !@page.page_plugin.nil?

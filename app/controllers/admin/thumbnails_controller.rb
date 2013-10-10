@@ -12,7 +12,7 @@ class Admin::ThumbnailsController < ApplicationController
     @thumbnail = ThumbStyle.find(params[:id])
   end
   def create
-    @thumbnail = ThumbStyle.new(params[:stylesheet])
+    @thumbnail = ThumbStyle.new(params[:thumb_style])
     if @thumbnail.save
       redirect_to admin_thumb_styles_url
     else
@@ -21,7 +21,7 @@ class Admin::ThumbnailsController < ApplicationController
   end
   def update
     @thumbnail = ThumbStyle.find(params[:id])
-    if @thumbnail.update_attributes(params[:stylesheet])
+    if @thumbnail.update_attributes(params[:thumb_style])
       redirect_to admin_thumb_styles_url
     else
       render action: 'edit'

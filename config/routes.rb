@@ -30,7 +30,10 @@ Simondelacourt::Application.routes.draw do
     resources :menus do
       get 'saveorder', :on => :collection
     end
-    resources :page_plugins
+    resources :page_plugins do
+      get 'export'
+      post 'import', :on => :collection
+    end
     resources :extras do
       post 'importtumblr', :on => :collection
     end

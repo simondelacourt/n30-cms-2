@@ -11,7 +11,9 @@
 		<% @pageplugins.each do |s| %>
 		<tr>
 			<td><%= link_to s.title, edit_admin_page_plugin_url(s)  -%></td>
-			<td><div class="btn-group pull-right"><%= link_to 'Verwijder', admin_page_plugin_url(s), method: :delete, :action => 'destroy', :confirm => 'Weet u zeker dat u de stylesheet wilt verwijderen', :class => 'btn btn-default btn-sm' %></div></td>
+			<td><div class="btn-group pull-right"><%= link_to 'Verwijder', admin_page_plugin_url(s), method: :delete, :action => 'destroy', :confirm => 'Weet u zeker dat u de stylesheet wilt verwijderen', :class => 'btn btn-default btn-sm' %>
+				<%= link_to 'Exporteer', admin_page_plugin_export_url(s),  :class => 'btn btn-default btn-sm'  %>
+			</div></td>
 		</tr>
 		<% end %>
 </tbody>

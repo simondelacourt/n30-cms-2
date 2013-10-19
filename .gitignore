@@ -16,4 +16,5 @@
 /solr
 /public/as/javascripts/*
 /public/as/stylesheets/*
+public/as/stylesheets/*.css
 .DS_Store

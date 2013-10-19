@@ -13,7 +13,8 @@ class Admin::BlogPostsController < ApplicationController
   end
   def new 
     @blogpost = BlogPost.new
-    @bloggroup = BlogGroup.find(:all)
+    @bloggroup = BlogGroup.all
+    @pagetitle = 'Nieuwe blog groep'
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @blogpost }
@@ -21,12 +22,14 @@ class Admin::BlogPostsController < ApplicationController
   end
   def edit
     @blogpost = BlogPost.find(params[:id])
-    @bloggroup = BlogGroup.find(:all)
+    @bloggroup = BlogGroup.all
     @pagetitle = 'Wijzig ' + @blogpost.title
   end
   def create
     @blogpost = BlogPost.new(params[:blog_post])
-    @bloggroup = BlogGroup.find(:all)
+    @lastblogpost = BlogPost.last
+    @blogpost.original_id = String(@lastblogpost.id + 1).crypt("$6$somesalt")
+    @bloggroup = BlogGroup.all
     
     @blogpost.user = current_user
     if @blogpost.save

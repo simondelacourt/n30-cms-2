@@ -9,7 +9,6 @@ class Admin::BlogTemplatesController < ApplicationController
   def new
     @blogtemplate = BlogTemplate.new
     @pagetitle = 'Nieuwe CSS Stylesheets'
-    
   end
   def edit
     @blogtemplate = BlogTemplate.find(params[:id])

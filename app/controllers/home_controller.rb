@@ -1,13 +1,13 @@
 class HomeController < ApplicationController
   def index
-    if @appsettings[:home].nil?
+    if @appsettings['home'].nil?
       home = 'blog'
     else
-      if @appsettings[:home] == 'blog'
+      
+      if @appsettings['home'] == 'blog'
         home == 'blog'
       else
-        page = @appsettings[:home][5..-1]
-        home = 'page'
+        page = @appsettings['home'][5..-1]
       end
     end
     if home == 'blog'
@@ -26,7 +26,7 @@ class HomeController < ApplicationController
       end
     else
       begin
-        @page = Page.find(page)
+        @page = Page.friendly.find(page)
       rescue ActiveRecord::RecordNotFound
          return render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
       end
@@ -37,9 +37,9 @@ class HomeController < ApplicationController
         @page.descendants.each do |d|
           @ids.push d.id
         end
-        embeddables = Embeddable.where(page_id: @ids)
+        embeddables = Embeddable.where(page_id: @ids).order('sortorder ASC')
       else
-        embeddables = Embeddable.where(page_id: @page.id)
+        embeddables = Embeddable.where(page_id: @page.id).order('sortorder ASC')
       end
       @embeddables = Array.new
       embedarray = Array.new

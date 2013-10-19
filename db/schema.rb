@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131007151009) do
+ActiveRecord::Schema.define(version: 20131019185432) do
 
   create_table "blog_categories", force: true do |t|
     t.string   "title"
@@ -85,12 +85,13 @@ ActiveRecord::Schema.define(version: 20131007151009) do
     t.text     "htmlbody"
     t.text     "link"
     t.string   "linkmode"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "sortorder",          default: 0
   end
 
   create_table "friendly_id_slugs", force: true do |t|

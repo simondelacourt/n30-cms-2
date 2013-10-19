@@ -3,7 +3,7 @@ class Admin::PagePluginsController < ApplicationController
   layout 'admin'
   
   def index
-    @pageplugins = PagePlugin.find(:all)
+    @pageplugins = PagePlugin.all
     @pagetitle = 'Pagina plugins'
     
   end

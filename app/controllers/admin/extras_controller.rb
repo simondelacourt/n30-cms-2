@@ -3,7 +3,7 @@ class Admin::ExtrasController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-    
+    @pagetitle = 'Extras'
   end
   
   def importtumblr

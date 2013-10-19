@@ -3,10 +3,11 @@ class Admin::EmbeddablesController < ApplicationController
   before_filter :authenticate_user!
   def new
     @embeddable = Embeddable.new
-    @embeddable.page = Page.find(params[:page_id])
-    @mode = params[:mode]
-    @page = Page.find(params[:page_id])
+    @page = Page.friendly.find(params[:page_id])
     
+    @embeddable.page = @page
+    @mode = params[:mode]
+    @pagetitle = 'Nieuwe embeddable'
   end
   def create
     @page = Page.find(params[:page_id])
@@ -34,7 +35,7 @@ class Admin::EmbeddablesController < ApplicationController
   def edit
     @embeddable = Embeddable.find(params[:id])
     @page = Page.find(params[:page_id])
-    
+    @pagetitle = "Wijzig #{@page.title}"
   end
   def update
     @embeddable = Embeddable.find(params[:id])

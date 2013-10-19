@@ -3,5 +3,6 @@ class Admin::MainController < ApplicationController
   layout 'admin'
   def index
     @blogposts = BlogPost.find(:all, :order => 'created_at DESC', :limit => '5')
+    @pagetitle = 'Welkom'
   end
 end

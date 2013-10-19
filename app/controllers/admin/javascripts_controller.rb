@@ -3,14 +3,12 @@ class Admin::JavascriptsController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-    @javascripts = Javascript.find(:all)
+    @javascripts = Javascript.all
     @pagetitle = 'Javascripts'
-    
   end
   def new
     @javascript = Javascript.new
     @pagetitle = 'Nieuw script'
-    
   end
   def edit
     @javascript = Javascript.find(params[:id])

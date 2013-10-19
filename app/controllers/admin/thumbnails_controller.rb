@@ -4,12 +4,15 @@ class Admin::ThumbnailsController < ApplicationController
   
   def index
     @thumbnails = ThumbStyle.find(:all)
+    @pagetitle = 'Thumbnail formaten'
   end
   def new
     @thumbnail = ThumbStyle.new
+    @pagetitle = 'Nieuw formaat'
   end
   def edit
     @thumbnail = ThumbStyle.find(params[:id])
+    @pagetitle = "Wijzig #{@thumbnail.title}"
   end
   def create
     @thumbnail = ThumbStyle.new(params[:thumb_style])

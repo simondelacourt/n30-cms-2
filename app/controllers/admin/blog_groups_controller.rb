@@ -2,16 +2,18 @@ class Admin::BlogGroupsController < ApplicationController
   layout 'admin'
   before_filter :authenticate_user!
   def index
-    @groups = BlogGroup.find(:all)
+    @groups = BlogGroup.all
     @group = BlogGroup.new
     @pagetitle = 'Blog categorien'
     
   end
   def new
     @group = BlogGroup.new
+    @pagetitle = 'Nieuwe blog categorie'
   end
   def show
     @group = BlogGroup.find(params[:id])
+    @pagetitle = @group.title
   end
   def create
     @group = BlogGroup.new(params[:blog_group])

@@ -25,6 +25,7 @@ Simondelacourt::Application.routes.draw do
     resources :blog_templates
     resources :pages do
       resources :embeddables
+      get 'saveorder'
     end
     resources :users
     resources :menus do

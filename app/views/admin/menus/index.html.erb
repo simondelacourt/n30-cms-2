@@ -50,45 +50,28 @@
 
 <script>
 
+
 function getIds () {
-	var ids = [];
-	$('.mitem').each(function(){
-		ids[ids.length] = $(this).attr('id');
-	});
-	return ids.join('.')
+        var ids = [];
+        $('.mitem').each(function(){
+                ids[ids.length] = $(this).attr('id');
+        });
+        return ids.join('.')
 }
 
 
 $("#menustruct li > ul").sortable({
-	update: function(event, ui) {
-		$.get('<%= url_for saveorder_admin_menus_url(:format => 'json') -%>', {order:getIds});
-	}
+        update: function(event, ui) {
+                $.get('<%= url_for saveorder_admin_menus_url(:format => 'json') -%>', {order:getIds});
+        }
 }).disableSelection();
 
-
-// Return a helper with preserved width of cells
-var fixHelper = function(e, ui) {
-	ui.children().each(function() {
-		$(this).width($(this).width());
-	});
-	return ui;
-};
 
 $("#menustruct").sortable({
-	helper: fixHelper,
-	update: function(event, ui) {
-		$.get('<%= url_for saveorder_admin_menus_url(:format => 'json') -%>', {order:getIds});
-	}
+        update: function(event, ui) {
+                $.get('<%= url_for saveorder_admin_menus_url(:format => 'json') -%>', {order:getIds});
+        }
 }).disableSelection();
 
-var fixHelperModified = function(e, tr) {
-	var $originals = tr.children();
-	var $helper = tr.clone();
-	$helper.children().each(function(index)
-	{
-		$(this).width($originals.eq(index).width())
-	});
-	return $helper;
-};
 
 </script>

@@ -13,3 +13,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+/solr
+/public/as/javascripts/*
+/public/as/stylesheets/*
+*.DS_Store

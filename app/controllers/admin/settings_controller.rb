@@ -2,7 +2,7 @@ class Admin::SettingsController < ApplicationController
   layout 'admin'
   before_filter :authenticate_user!
   def index
-    @settings = Setting.find(:all)
+    @settings = Setting.all
     @pagetitle = 'Instellingen'
     
   end

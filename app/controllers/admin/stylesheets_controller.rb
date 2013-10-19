@@ -3,7 +3,7 @@ class Admin::StylesheetsController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-    @stylesheets = Stylesheet.find(:all)
+    @stylesheets = Stylesheet.all
     @pagetitle = 'CSS Stylesheets'
   end
   def new
@@ -12,7 +12,7 @@ class Admin::StylesheetsController < ApplicationController
     
   end
   def edit
-    @stylesheet = Stylesheet.find(params[:id])
+    @stylesheet = Stylesheet.friendly.find(params[:id])
     @pagetitle = "Wijzig #{@stylesheet.title}"
   end
   def create
@@ -28,7 +28,7 @@ class Admin::StylesheetsController < ApplicationController
     end
   end
   def update
-    @stylesheet = Stylesheet.find(params[:id])
+    @stylesheet = Stylesheet.friendly.find(params[:id])
     if @stylesheet.update_attributes(params[:stylesheet])
       @stylesheet.savetofile
       
@@ -41,7 +41,7 @@ class Admin::StylesheetsController < ApplicationController
     end
   end
   def destroy
-    @stylesheet = Stylesheet.find(params[:id])
+    @stylesheet = Stylesheet.friendly.find(params[:id])
     @stylesheet.delete
     redirect_to admin_stylesheets_url
   end

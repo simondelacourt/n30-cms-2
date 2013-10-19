@@ -4,11 +4,14 @@ class Admin::MenusController < ApplicationController
   
   def index
     @menus = Menu.scoped
+    @pagetitle = 'Menus'
   end
   def show
     @menu = Menu.find(params[:id])
+    @pagetitle = @menu.title
   end
   def new
+    @pagetitle = 'Nieuw menu'
     @menu = Menu.new
     if params[:linkmode]
       if params[:linkmode] == 'page'
@@ -27,6 +30,7 @@ class Admin::MenusController < ApplicationController
   end
   def edit
     @menu = Menu.find(params[:id])
+    @pagetitle = @menu.title
     if @menu.linkmode == 'page'
       @pages = Page.find(:all)
     end

@@ -1,5 +1,6 @@
 <div class="row">
-	<div class="col-md-2">
+	<div class="col-md-2 ">
+		<div class="admin-left-pane">
 		<h2><%= @page.title -%></h2>
 		<div class="btn-group-vertical">
 			<%= link_to 'Wijzig pagina', edit_admin_page_url(@page), :class => 'btn btn-default btn-sm' -%>
@@ -7,6 +8,7 @@
 			<%= link_to 'Voeg afbeelding toe', new_admin_page_embeddable_url(@page, :mode => 'image'), :class => 'btn btn-default btn-sm' -%>
 			<%= link_to 'Embed link', new_admin_page_embeddable_url(@page, :mode => 'link'), :class => 'btn btn-default btn-sm' -%>
 		</div>
+	</div>
 	</div>
 	<div class="col-md-10">
 		<div class="settings-pane-intro">
@@ -81,30 +83,23 @@
 		</div>
 		<div class="settings-pane settings-pane-text">
 			<% if @embeddables.length > 0 %>
-			<table class="table table-striped">
-				<tbody>
+			<ul id="embedlist">
 					<% @embeddables.each do |e| %>
-					<tr>
-					<% if e.linkmode == 'link'%>
-					<td><%= link_to(image_tag(embedify(e.htmlbody, 180)['thumbnail_url'], :class => 'img-thumbnail img-responsive'), edit_admin_page_embeddable_url(:id => e.id, :page_id => params[:id])) -%></td>
-					<% else %>
-					<td><%= link_to(image_tag(e.image(:thumb), :class => 'img-thumbnail img-responsive'),  edit_admin_page_embeddable_url(:id => e.id, :page_id => params[:id]))   -%></td>
-					<% end %>
-					<td>
-						<%= e.title -%>
-					</td>
-					<td><div class="btn-group pull-right">
-						<%= link_to raw('<i class="icon-remove"></i> Verwijder'), admin_page_embeddable_url(:id => e.id, :page_id => params[:id]), :confirm => "Weet u zeker dat u deze embeddable wilt verwijderen?", :method => :delete, :action => "destroy", :class => 'btn btn-default btn-xs' -%>
-						<%= link_to raw('<i class="icon-edit"></i> Wijzig'), edit_admin_page_embeddable_url(:id => e.id, :page_id => params[:id]), :class => 'btn btn-default btn-xs' -%>
-						</div>
-					</td>
-				</tr>
+					<li id="ct_<%= e.id -%>">
+						<% if e.linkmode == 'link'%>
+						<div><%= link_to(image_tag(embedify(e.htmlbody, 180)['thumbnail_url'], :class => 'img-thumbnail img-responsive'), edit_admin_page_embeddable_url(:id => e.id, :page_id => params[:id])) -%></div>
+						<% else %>
+						<div><%= link_to(image_tag(e.image(:thumb), :class => 'img-thumbnail img-responsive'),  edit_admin_page_embeddable_url(:id => e.id, :page_id => params[:id]))   -%></div>
+						<% end %>
+							<div class="title"><%= e.title -%></div>
+							<div class="btn-group pull-right">
+							<%= link_to raw('<i class="icon-remove"></i> Verwijder'), admin_page_embeddable_url(:id => e.id, :page_id => params[:id]), :confirm => "Weet u zeker dat u deze embeddable wilt verwijderen?", :method => :delete, :action => "destroy", :class => 'btn btn-default btn-xs' -%>
+							<%= link_to raw('<i class="icon-edit"></i> Wijzig'), edit_admin_page_embeddable_url(:id => e.id, :page_id => params[:id]), :class => 'btn btn-default btn-xs' -%>
+							</div>
+				</li>
 					<% end -%>
-			
-			
-			
-			</table>
-			<% end -%>
+		</ul>
+		<% end -%>
 		</div>
 		<ol class="breadcrumb">
 			<li><%= link_to 'Pagina\'s', admin_pages_url -%></li>
@@ -114,3 +109,23 @@
 
 	</div>
 </div>
+<script>
+
+function getIds () {
+	var ids = [];
+	$('#embedlist li').each(function(){
+		ids[ids.length] = $(this).attr('id');
+	});
+	return ids.join('.');
+}
+
+$(document).ready(function () {
+	$("#embedlist").sortable({
+		update: function(event, ui) {
+			$.get('<%= url_for admin_page_saveorder_url(:page_id => @page.id, :format => 'json') -%>', {order:getIds});
+		}
+		
+	});
+
+});
+</script>

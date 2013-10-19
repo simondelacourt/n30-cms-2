@@ -15,9 +15,9 @@ class PagesController < ApplicationController
       @page.descendants.each do |d|
         @ids.push d.id
       end
-      embeddables = Embeddable.where(page_id: @ids)
+      embeddables = Embeddable.where(page_id: @ids).order('sortorder ASC')
     else
-      embeddables = Embeddable.where(page_id: @page.id)
+      embeddables = Embeddable.where(page_id: @page.id).order('sortorder ASC')
     end
     @embeddables = Array.new
     embedarray = Array.new

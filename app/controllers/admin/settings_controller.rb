@@ -43,7 +43,7 @@ class Admin::SettingsController < ApplicationController
   end
   def setashome
     if params[:page]
-      @page = Page.find(params[:page])
+      @page = Page.friendly.find(params[:page])
       unless @page.nil?
         @setting = Setting.find_by_title('home')
         @setting.settings = "page_#{@page.slug}"

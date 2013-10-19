@@ -3,7 +3,7 @@ class Admin::BlogTemplatesController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-    @blogtemplates = BlogTemplate.find(:all)
+    @blogtemplates = BlogTemplate.all
     @pagetitle = 'Blog templates'
   end
   def new

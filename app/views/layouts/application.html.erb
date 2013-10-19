@@ -8,17 +8,15 @@
 	<meta name="description" content="<%= @sitetemplate.meta_description -%>">
 	<meta name="viewport" content="width=device-width">
 		
-	<% @sitetemplate.stylesheets.find(:all, :include => [:template_sheets], :order => 'template_sheets.ordernum ASC').each do |s| %>
+	<% @sitetemplate.stylesheets.order('template_sheets.ordernum ASC').each do |s| %>
 	<% if s.external_link.empty?%>
 	<%= stylesheet_link_tag   root_url + s.getfileurl, :media => "all" %>
 	<% else -%>
 	<%= stylesheet_link_tag    s.external_link, :media => "all" %>
 	<% end end -%>
-	
 	<% @sideloaderCSS.each do |css| %>
 	<%= stylesheet_link_tag   url_for(css), :media => "all" %>
 	<% end -%>
-	
 	<% @sitetemplate.javascripts.each do |j| %>
 	<% if j.external_link.empty?%>
 	<%= javascript_include_tag    root_url + j.getfileurl %>
@@ -35,7 +33,6 @@
 	<%= csrf_meta_tags %>
 </head>
 <body>
-	
 	<%= raw( @sitelayout.to_s.sub(/\[content\]/, yield) ) %>
 </body>
 </html>

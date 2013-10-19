@@ -5,6 +5,8 @@ class Admin::EmbeddablesController < ApplicationController
     @embeddable = Embeddable.new
     @embeddable.page = Page.find(params[:page_id])
     @mode = params[:mode]
+    @page = Page.find(params[:page_id])
+    
   end
   def create
     @page = Page.find(params[:page_id])
@@ -17,8 +19,10 @@ class Admin::EmbeddablesController < ApplicationController
         render :new
       end
     else
-      #raise params[:embeddable][:image].inspect
       @embeddable = Embeddable.new(params[:embeddable])
+      if params[:embeddable][:title].empty?
+        @embeddable.title = params[:embeddable][:image].original_filename
+      end
       @embeddable.page_id = @page.id        
         if @embeddable.save
           redirect_to admin_page_url(@page.id)
@@ -29,6 +33,8 @@ class Admin::EmbeddablesController < ApplicationController
   end
   def edit
     @embeddable = Embeddable.find(params[:id])
+    @page = Page.find(params[:page_id])
+    
   end
   def update
     @embeddable = Embeddable.find(params[:id])

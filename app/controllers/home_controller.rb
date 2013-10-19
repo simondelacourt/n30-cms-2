@@ -1,23 +1,24 @@
 class HomeController < ApplicationController
   def index
-    if @appsettings['home'].nil?
+    if @appsettings[:home].nil?
       home = 'blog'
     else
-      if @appsettings['home'] == 'blog'
+      if @appsettings[:home] == 'blog'
         home == 'blog'
       else
-        page = @appsettings['home'][5..-1]
+        page = @appsettings[:home][5..-1]
         home = 'page'
       end
     end
     if home == 'blog'
-      @blogtemplate = BlogTemplate.find_by_mode(true)
+      @blogtemplate = BlogTemplate.where(mode: true).take
       if @blogtemplate.nil?
         # no template? take first
         @blogtemplate = BlogTemplate.first
       end
       @blogposts = BlogPost.paginate(:page => params[:page], :per_page => 10).order("created_at desc")
-      @bloggroups = BlogGroup.find(:all)
+      @bloggroups = nil
+      @bloggroups = BlogGroup.all
       begin
         render :inline => @blogtemplate.blog_index, :layout => true, :locals => {:blogposts => @blogposts, :bloggroups => @bloggroups}
       rescue ActionView::Template::Error => e

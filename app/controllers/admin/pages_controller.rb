@@ -6,7 +6,7 @@ class Admin::PagesController < ApplicationController
     @pages = Page.scoped
   end
   def show
-    @page = Page.find(params[:id])
+    @page = Page.friendly.find(params[:id])
     @ids = [@page.id]
     if @page.sourcefromchildren
       @page.descendants.each do |d|
@@ -25,7 +25,7 @@ class Admin::PagesController < ApplicationController
     end
   end
   def edit
-    @page = Page.find(params[:id])
+    @page = Page.friendly.find(params[:id])
   end
   def create
     @page = Page.new(params[:page])
@@ -36,7 +36,7 @@ class Admin::PagesController < ApplicationController
     end
   end
   def update
-    @page = Page.find(params[:id])
+    @page = Page.friendly.find(params[:id])
     if @page.update_attributes(params[:page])
       flash[:notice] = 'Pagina gewijzigd'
       redirect_to admin_page_url(@page)
@@ -46,7 +46,7 @@ class Admin::PagesController < ApplicationController
     end
   end
   def destroy
-    @page = Page.find(params[:id])
+    @page = Page.friendly.find(params[:id])
     @page.destroy
     redirect_to admin_pages_url
   end

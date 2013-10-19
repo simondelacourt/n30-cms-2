@@ -1,6 +1,6 @@
 class BlogController < ApplicationController
   def index
-    @blogtemplate = BlogTemplate.find_by_mode(true)
+    @blogtemplate = BlogTemplate.where(mode: true).take
     if @blogtemplate.nil?
       # no template? take first
       @blogtemplate = BlogTemplate.first
@@ -9,7 +9,7 @@ class BlogController < ApplicationController
 
     
     @blogposts = BlogPost.paginate(:page => params[:page], :per_page => 10).order("created_at desc")
-    @bloggroups = BlogGroup.find(:all)
+    @bloggroups = BlogGroup.all
     
     
     begin
@@ -19,14 +19,14 @@ class BlogController < ApplicationController
     end
   end
   def show
-    @blogtemplate = BlogTemplate.find_by_mode(true)
+    @blogtemplate = BlogTemplate.where(mode: true)
     if @blogtemplate.nil?
       # no template? take first
       @blogtemplate = BlogTemplate.first
     end
     
     
-    @bloggroups = BlogGroup.find(:all)
+    @bloggroups = BlogGroup.all
     @blogpost = BlogPost.find(params[:id])
     
     begin
@@ -43,7 +43,7 @@ class BlogController < ApplicationController
     end
     
     
-    @bloggroups = BlogGroup.find(:all)
+    @bloggroups = BlogGroup.all
     
     page_num = 1
     if params[:page] && !params[:page].empty?

@@ -1,5 +1,6 @@
 <div class="container">
 	<div class="row" >
+		<% unless @bloggroups.nil? %>
 		<nav id="blognav" class="col-md-3">
 			<% @bloggroups.each do |bg |%>
 			<h2><%= bg.title -%></h2>
@@ -10,11 +11,13 @@
 			</ul>			
 			<% end -%>
 		</nav>
+		<% end -%>
+		<% unless @blogposts.nil? %>
 		<section id="blog" class="col-md-9">
 			<% @blogposts.each do |bp| %>
 			<%= render partial: 'blog_post', :object => bp, locals: {barclass: 'blog-message', rendermode: 'intro'} -%>
 			<% end -%>
-		
 		</section>
+		<% end -%>
 	</div>
 </div>

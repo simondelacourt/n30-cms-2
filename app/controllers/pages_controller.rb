@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def show
     begin
-      @page = Page.find(params[:id])
+      @page = Page.friendly.find(params[:id])
     rescue ActiveRecord::RecordNotFound
        return render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
     end

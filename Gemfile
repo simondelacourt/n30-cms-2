@@ -1,13 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '4.0.0'
 
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
-end
-
+gem 'sass-rails',   '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem 'mysql2'
 gem 'formtastic'
@@ -18,13 +15,18 @@ gem 'therubyracer'
 gem 'acts-as-taggable-on'
 gem 'rails3-jquery-autocomplete'
 gem 'ohembedr'
-gem 'remotipart', "~> 1.0"
+gem 'remotipart'
 gem 'rack-cache'
-gem 'friendly_id'
+gem "friendly_id", :git => "git@github.com:FriendlyId/friendly_id.git", :branch => '5.0-stable'
 gem 'brakeman', :require => false
 gem 'yui-compressor'
 gem 'nokogiri'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'sunspot_rails'
-gem 'sunspot_solr'
+gem 'sunspot_solr', '~> 2.0.0', group: :development
+gem 'protected_attributes'
+gem 'rails-observers'
+gem 'actionpack-page_caching'
+gem 'actionpack-action_caching'
+gem 'activerecord-deprecated_finders'

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     
     
     if current_user.nil?
-      if User.find(:all).count == 0
+      if User.all.count == 0
         u = User.new(:email => "admin@admin.com", :password => 'defaultpassword', :password_confirmation => 'defaultpassword')
         u.save!
       end
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
     
     # settings
-    titlesetting = Setting.find_by_title('title')
+    titlesetting = Setting.where(title: 'title').take
     unless titlesetting.nil?
       @title = titlesetting.settings
     end
@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
       # do any users exist?
       
       #load template
-      @sitetemplate = Template.find_by_tdefault(true)
+      @sitetemplate = Template.where(tdefault: true).take
       if @sitetemplate.nil?
         # no template? take first
         @sitetemplate = Template.first
@@ -36,9 +36,10 @@ class ApplicationController < ActionController::Base
       
       # load menu
       @sitemenu = Menu.arrange(:order => :ordernum)
-      
       begin
-        @sitelayout = render_to_string :inline => @sitetemplate.template, :layout => false, :locals => {:page => @sitemenu}
+        respond_to do |format|
+          format.html {@sitelayout = render_to_string(:inline => @sitetemplate.template, :layout => false, :locals => {:page => @sitemenu})}
+        end
       rescue Exception => e
         @sitelayout = render_to_string :inline => "template error: #{e}", :layout => false
       end
@@ -51,7 +52,7 @@ class ApplicationController < ActionController::Base
       # load settings
       
       @appsettings = Hash.new
-      Setting.find(:all).each do |s|
+      Setting.all.each do |s|
         @appsettings[s.title] = s.settings
       end
       

@@ -40,7 +40,7 @@
 
 
 <% else %>
-<%= form_for [:admin, :page, @embeddable], :html => { :multipart => true, :role => 'form',  class: "form-horizontal"}, :remote => true do |f| %>
+<%= form_for [:admin, @page, @embeddable], :html => { :multipart => true, :role => 'form',  class: "form-horizontal"}, :remote => true do |f| %>
 <div class="form-group">
 	<%= f.label :title, :class => 'col-lg-1 control-label'%>
     <div class="col-lg-11">

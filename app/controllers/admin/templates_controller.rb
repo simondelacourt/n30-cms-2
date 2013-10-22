@@ -54,7 +54,8 @@ class Admin::TemplatesController < ApplicationController
           counter += 1
           currentid = d[4..d.length+1]
           css = TemplateSheet.find(currentid)
-          css.update_attribute(:ordernum, counter)
+          css.ordernum = counter
+          css.save
         end
         
         render :json => {:status => 'ok'}
@@ -65,13 +66,18 @@ class Admin::TemplatesController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
+        expires_in(1)
+        
         data =  params[:order].split(".")
         counter = 0
         data.each do |d|
           counter += 1
           currentid = d[4..d.length+1]
           js = TemplateScript.find(currentid)
-          js.update_attribute(:ordernum, counter)
+          js.ordernum = counter
+          if !js.save
+            raise js.errors.inspect
+          end
         end
         
         render :json => {:status => 'ok'}

@@ -3,9 +3,8 @@ class HomeController < ApplicationController
     if @appsettings['home'].nil?
       home = 'blog'
     else
-      
       if @appsettings['home'] == 'blog'
-        home == 'blog'
+        home = 'blog'
       else
         page = @appsettings['home'][5..-1]
       end
@@ -16,7 +15,7 @@ class HomeController < ApplicationController
         # no template? take first
         @blogtemplate = BlogTemplate.first
       end
-      @blogposts = BlogPost.paginate(:page => params[:page], :per_page => 10).order("created_at desc")
+      @blogposts = BlogPost.paginate(:page => params[:page], :per_page => @appsettings['postsperpage'].to_i).where("status = 'published'").order("created_at desc")
       @bloggroups = nil
       @bloggroups = BlogGroup.all
       begin

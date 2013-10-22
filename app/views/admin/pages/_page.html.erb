@@ -3,7 +3,7 @@
 <td>
  <div class="navbar-right btn-group">
 	 <%= link_to raw('<i class="icon-plus"></i>  Nieuwe pagina'), new_admin_page_url(:parent_id => page), :class=> 'btn btn-default btn-xs'%>
-	<%= link_to raw('<i class="icon-remove"></i> Verwijder pagina'), admin_page_url(page), :confirm => "Weet u zeker dat u deze pagina wilt verwijderen?", :method => :delete, :action => "destroy", :class => 'btn btn-default btn-xs' -%>
+	<%= link_to raw('<i class="icon-remove"></i> Verwijder pagina'), admin_page_url(page), data: {:confirm => "Weet u zeker dat u deze pagina wilt verwijderen?"}, :method => :delete, :action => "destroy", :class => 'btn btn-default btn-xs' -%>
  
  
  </div>

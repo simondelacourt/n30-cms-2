@@ -8,7 +8,7 @@ class Embeddable < ActiveRecord::Base
 
   def attachment_sizes
     sizes = { :thumb => "100x100" }
-    tm = ThumbStyle.find(:all)
+    tm = ThumbStyle.all
     tm.each do |size|
       sizes[:"#{size.title}"] = [size.sizes]
     end

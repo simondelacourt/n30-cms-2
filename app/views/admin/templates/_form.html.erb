@@ -42,8 +42,13 @@
 	<%= f.label 'Verbonden stylesheets', :class => 'col-lg-2 control-label'%>
 	<div class="col-lg-10">
 		<ul id="stylesheets">
-		<% Stylesheet.find(:all, :include => [:template_sheets], :order => 'template_sheets.ordernum ASC').each do |s| %>
-		<li <% if @template.stylesheets.include?(s) -%> class="csitem" id="crt_<%= @template.template_sheets.find_by_stylesheet_id(s.id).id %>"<% end -%>><label class="checkbox-inline"><%= check_box_tag :stylesheet_ids, s.id, @template.stylesheets.include?(s), :name => 'template[stylesheet_ids][]' -%> <%= s.title -%></label></li>
+		<% TemplateSheet.includes(:stylesheet).references(:stylesheet).order('template_sheets.ordernum ASC').where("template_sheets.template_id = '#{@template.id}' ").each do |s| %>
+		<li class="csitem" id="crt_<%= s.id %>"><label class="checkbox-inline"><%= check_box_tag :stylesheet_ids, s.stylesheet.id, @template.stylesheets.include?(s.stylesheet), :name => 'template[stylesheet_ids][]' -%> <%= s.stylesheet.title -%></label></li>
+		<% end -%>
+		<% Stylesheet.all.each do |s| %>
+		<% if !@template.stylesheets.include?(s) %>
+		<li><label class="checkbox-inline"><%= check_box_tag :stylesheet_ids, s.id, false, :name => 'template[stylesheet_ids][]' -%><%= s.title -%></label></li>
+		<% end -%>
 		<% end -%>
 		</ul>
 	</div>
@@ -52,9 +57,14 @@
 	<%= f.label 'Verbonden javascripts', :class => 'col-lg-2 control-label'%>
 	<div class="col-lg-10">
 		<ul id="javascripts">
-		  <% Javascript.find(:all, :include => [:template_scripts], :order => 'template_scripts.ordernum ASC').each do |j| %>
-		<li <% if @template.javascripts.include?(j) -%> class="jsitem" id="crt_<%= @template.template_scripts.find_by_javascript_id(j.id).id %>"<% end -%>><label class="checkbox-inline"><%= check_box_tag :javascript_ids, j.id, @template.javascripts.include?(j), :name => 'template[javascript_ids][]' -%> <%= j.title -%></label></li>
-		<% end -%>
+			<% TemplateScript.includes(:javascript).references(:javascript).order('template_scripts.ordernum ASC').where("template_scripts.template_id = '#{@template.id}' ").each do |s| %>
+			<li class="jsitem" id="crt_<%= s.id %>"><label class="checkbox-inline"><%= check_box_tag :javascript_ids, s.javascript.id, @template.javascripts.include?(s.javascript), :name => 'template[javascript_ids][]' -%> <%= s.javascript.title -%></label></li>
+			<% end -%>
+			<% Javascript.all.each do |s| %>
+			<% if !@template.javascripts.include?(s) %>
+			<li><label class="checkbox-inline"><%= check_box_tag :javascript_ids, s.id, false, :name => 'template[javascript_ids][]' -%><%= s.title -%></label></li>
+			<% end -%>
+			<% end -%>
 		</ul>
   </div>
 </div>

@@ -17,7 +17,7 @@
 	<% @sideloaderCSS.each do |css| %>
 	<%= stylesheet_link_tag   url_for(css), :media => "all" %>
 	<% end -%>
-	<% @sitetemplate.javascripts.each do |j| %>
+	<% @sitetemplate.javascripts.order('template_scripts.ordernum ASC').each do |j| %>
 	<% if j.external_link.empty?%>
 	<%= javascript_include_tag    root_url + j.getfileurl %>
 	<% else %>

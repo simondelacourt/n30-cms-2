@@ -9,14 +9,28 @@
   </ul>
 </div>
 <% end %>
-
-
 <div class="form-group">
 	<%= f.label :title, :class => 'col-lg-1 control-label'%>
     <div class="col-lg-11">
 		<%= f.text_field :title, :class => "form-control"%>
 	</div>
 </div>
+<div class="form-group">
+	<%= f.label 'Satus', :class => 'col-lg-1 control-label'%>
+    <div class="col-lg-11">
+		<div class="radio">
+		  <label>
+		  	<i class="icon-ok-circle"></i> <%= f.radio_button :status, 'published' %> Gepubliceerd 
+		  </label>
+		</div>
+		<div class="radio">
+  		  <label>
+  		 	 <i class="icon-ban-circle"></i>  <%= f.radio_button :status, 'unpublished' %>  Verborgen
+  		  </label>
+		</div>
+	</div>
+</div>
+
 <div class="form-group">
 	<%= f.label :categorie, :class => 'col-lg-1 control-label'%>
     <div class="col-lg-11">

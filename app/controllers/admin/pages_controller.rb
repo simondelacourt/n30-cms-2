@@ -3,7 +3,7 @@ class Admin::PagesController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-    @pages = Page.scoped
+    @pages = Page.all
     @pagetitle = 'Pagina\'s'
   end
   def show

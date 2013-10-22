@@ -34,10 +34,12 @@ class Admin::SettingsController < ApplicationController
     Setting.delete_all
     # all settings deleted, now resetting defaults
     
-    def1 = Setting.new({:title => 'home', :settings => 'blog'})
-    def1.save
-    def2 = Setting.new({:title => 'title', :settings => 'site'})
-    def2.save
+    setting = Setting.new({:title => 'home', :settings => 'blog'})
+    setting.save
+    setting = Setting.new({:title => 'title', :settings => 'site'})
+    setting.save
+    setting = Setting.new({:title => 'postsperpage', :settings => 15})
+    setting.save
     redirect_to admin_settings_url
     
   end

@@ -13,6 +13,7 @@ class Admin::BlogPostsController < ApplicationController
   end
   def new 
     @blogpost = BlogPost.new
+    @blogpost.status = 'unpublished'
     @bloggroup = BlogGroup.all
     @pagetitle = 'Nieuwe blog groep'
     respond_to do |format|
@@ -51,6 +52,6 @@ class Admin::BlogPostsController < ApplicationController
     @blogpost = BlogPost.find(params[:id])
     @blogpost.delete
     
-    redirect_to admin_blog_posts_urlj
+    redirect_to admin_blog_posts_url
   end
 end

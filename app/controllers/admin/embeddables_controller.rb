@@ -10,7 +10,7 @@ class Admin::EmbeddablesController < ApplicationController
     @pagetitle = 'Nieuwe embeddable'
   end
   def create
-    @page = Page.find(params[:page_id])
+    @page = Page.friendly.find(params[:page_id])
     if params[:embeddable][:linkmode] == 'link'
       @embeddable = Embeddable.new(params[:embeddable])
       @embeddable.page_id = @page.id
@@ -24,6 +24,7 @@ class Admin::EmbeddablesController < ApplicationController
       if params[:embeddable][:title].empty?
         @embeddable.title = params[:embeddable][:image].original_filename
       end
+      
       @embeddable.page_id = @page.id        
         if @embeddable.save
           redirect_to admin_page_url(@page.id)

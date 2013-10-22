@@ -8,7 +8,7 @@ class BlogController < ApplicationController
   
 
     
-    @blogposts = BlogPost.paginate(:page => params[:page], :per_page => 10).order("created_at desc")
+    @blogposts = BlogPost.paginate(:page => params[:page], :per_page => @appsettings['postsperpage'].to_i).where("status = 'published'").order("created_at desc")
     @bloggroups = BlogGroup.all
     
     
@@ -19,12 +19,11 @@ class BlogController < ApplicationController
     end
   end
   def show
-    @blogtemplate = BlogTemplate.where(mode: true)
+    @blogtemplate = BlogTemplate.where(mode: true).take
     if @blogtemplate.nil?
       # no template? take first
       @blogtemplate = BlogTemplate.first
     end
-    
     
     @bloggroups = BlogGroup.all
     @blogpost = BlogPost.find(params[:id])

@@ -1,5 +1,5 @@
 class BlogPost < ActiveRecord::Base
-  attr_accessible :body, :intro, :title, :user_id, :tag_list, :blog_category_id, :leaderimage
+  attr_accessible :body, :intro, :title, :user_id, :tag_list, :blog_category_id, :leaderimage, :status
   
   has_many :blog_comments
   

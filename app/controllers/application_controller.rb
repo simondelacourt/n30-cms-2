@@ -16,11 +16,13 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    @appsettings = Hash.new
+    Setting.all.each do |s|
+      @appsettings[s.title] = s.settings
+    end
     
-    # settings
-    titlesetting = Setting.where(title: 'title').take
-    unless titlesetting.nil?
-      @title = titlesetting.settings
+    unless @appsettings['title'].nil?
+      @title = @appsettings['title']
     end
     
     # not admin so load template, menu
@@ -45,21 +47,13 @@ class ApplicationController < ActionController::Base
       end
       
       #sideloader for JS + CSS
-      
       @sideloaderJS = Array.new
       @sideloaderCSS = Array.new
       
-      # load settings
-      
-      @appsettings = Hash.new
-      Setting.all.each do |s|
-        @appsettings[s.title] = s.settings
+      # check if amount per pages
+      if @appsettings['postsperpage'].nil?
+        @appsettings['postsperpage'] = 15
       end
-      
-      unless @appsettings[:title].nil?
-        @title = @appsettings[:title]
-      end
-      
     else
       
     end
